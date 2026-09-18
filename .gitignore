@@ -1,0 +1,12 @@
+# ---- Node ----
+node_modules/
+
+# ---- Environment (contains secrets) ----
+.env
+
+# ---- Old JSON file storage (no longer needed with MongoDB) ----
+portfolio-data.json
+
+# ---- OS ----
+.DS_Store
+Thumbs.db

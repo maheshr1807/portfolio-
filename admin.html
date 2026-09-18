@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel — Mahesh R Portfolio</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+
+  <!-- ============================================================
+     APP SHELL
+     ============================================================ -->
+  <div id="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-brand">Admin Panel</div>
+        <div class="sidebar-sub">// portfolio.mahesh-r.dev</div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-label">Content</div>
+        <div class="nav-item active" data-section="hero">
+          <span class="nav-icon">🏠</span> Hero
+        </div>
+        <div class="nav-item" data-section="about">
+          <span class="nav-icon">👤</span> About
+        </div>
+        <div class="nav-item" data-section="skills">
+          <span class="nav-icon">⚡</span> Skills
+          <span class="nav-badge" id="badge-skills">0</span>
+        </div>
+        <div class="nav-item" data-section="projects">
+          <span class="nav-icon">🗂️</span> Projects
+          <span class="nav-badge" id="badge-projects">0</span>
+        </div>
+        <div class="nav-item" data-section="services">
+          <span class="nav-icon">🛠️</span> Services
+          <span class="nav-badge" id="badge-services">0</span>
+        </div>
+        <div class="nav-item" data-section="experience">
+          <span class="nav-icon">💼</span> Experience
+        </div>
+        <div class="nav-item" data-section="testimonials">
+          <span class="nav-icon">💬</span> Testimonials
+          <span class="nav-badge" id="badge-testimonials">0</span>
+        </div>
+        <div class="nav-item" data-section="contact">
+          <span class="nav-icon">📬</span> Contact
+        </div>
+
+        <div class="nav-section-label">System</div>
+        <div class="nav-item" data-section="settings">
+          <span class="nav-icon">⚙️</span> Settings
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a class="btn-view-site" href="index.html" target="_blank">↗ View Portfolio</a>
+      </div>
+    </aside>
+
+    <!-- MAIN AREA -->
+    <div class="main">
+      <div class="main-header">
+        <h1 id="mainTitle"><span class="section-icon">🏠</span> Hero Section</h1>
+        <span class="header-path" id="headerPath">portfolio/hero</span>
+      </div>
+
+      <div class="content-area">
+
+        <!-- ==============================
+           HERO PANEL
+           ============================== -->
+
+        <div id="panel-hero" class="section-panel active">
+          <p class="section-desc">// Edit the main hero section — name, tagline, typed roles, CTAs, and stack layers.
+          </p>
+
+          <div class="panel">
+            <div class="panel-header">
+              <span class="panel-title">🪪 Identity</span>
+            </div>
+            <div class="panel-body">
+              <div class="form-row">
+                <div class="field-group">
+                  <label>Full Name</label>
+                  <input id="heroName" type="text" placeholder="Your name" />
+                </div>
+              </div>
+              <div class="field-group">
+                <label>Hero Description</label>
+                <textarea id="heroDesc" placeholder="Short intro paragraph…" style="min-height:90px;"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <span class="panel-title">⌨️ Typed Roles <span class="pill">Tag editor — press Enter to add</span></span>
+            </div>
+            <div class="panel-body">
+              <div class="field-group">
+                <label>Roles (shown in typing animation)</label>
+                <div class="tag-editor" id="heroRolesEditor" onclick="focusTagInput('heroRolesEditor')"></div>
+                <div class="hint">Include quotes: e.g. "Full Stack Developer"</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <span class="panel-title">🔘 CTA Buttons</span>
+            </div>
+            <div class="panel-body">
+              <div class="form-row">
+                <div class="field-group"><label>Primary Button Label</label><input id="heroCta1Label" type="text"
+                    placeholder="$ view-projects" /></div>
+                <div class="field-group"><label>Primary Button Link</label><input id="heroCta1Href" type="url"
+                    placeholder="#projects" /></div>
+              </div>
+              <div class="form-row">
+                <div class="field-group"><label>Secondary Button Label</label><input id="heroCta2Label" type="text"
+                    placeholder="$ hire-me" /></div>
+                <div class="field-group"><label>Secondary Button Link</label><input id="heroCta2Href" type="url"
+                    placeholder="#contact" /></div>
+              </div>
+              <div class="form-row">
+                <div class="field-group"><label>Ghost Button Label</label><input id="heroCta3Label" type="text"
+                    placeholder="↓ download-resume" /></div>
+                <div class="field-group"><label>Ghost Button Link</label><input id="heroCta3Href" type="url"
+                    placeholder="#" /></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <span class="panel-title">📦 Stack Layers</span>
+              <button class="btn btn-ghost btn-sm" onclick="addStackLayer()">+ Add Layer</button>
+            </div>
+            <div class="panel-body">
+              <div class="stat-list" id="stackLayersList"></div>
+            </div>
+          </div>
+
+          <div class="save-bar">
+            <span class="save-bar-text">// Changes apply to portfolio on next page load</span>
+            <button class="btn btn-primary" onclick="saveHero()">💾 Save Hero Section</button>
+          </div>
+        </div>
+
+        <!-- ==============================
+           ABOUT PANEL
+           ============================== -->
+        <div id="panel-about" class="section-panel">
+          <p class="section-desc">// Edit the about section — bio paragraphs and info stats.</p>
+
+          <div class="panel">
+            <div class="panel-header">
+              <span class="panel-title">📝 Bio Paragraphs</span>
+              <button class="btn btn-ghost btn-sm" onclick="addPara()">+ Add Paragraph</button>
+            </div>
+            <div class="panel-body">
+              <div class="para-list" id="paraList"></div>
+              <div class="hint" style="margin-top:8px;">Tip: HTML tags like &lt;b&gt; are supported for bold text.</div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <span class="panel-title">📊 Info Stats (Right Column)</span>
+              <button class="btn btn-ghost btn-sm" onclick="addStatRow()">+ Add Stat</button>
+            </div>
+            <div class="panel-body">
+              <div class="stat-list" id="statList"></div>
+            </div>
+          </div>
+
+          <div class="save-bar">
+            <span class="save-bar-text">// Changes apply to portfolio on next page load</span>
+            <button class="btn btn-primary" onclick="saveAbout()">💾 Save About Section</button>
+          </div>
+        </div>
+
+        <!-- ==============================
+           SKILLS PANEL
+           ============================== -->
+        <div id="panel-skills" class="section-panel">
+          <p class="section-desc">// Manage skill categories and chips. Type a skill name and press Enter to add it.</p>
+
+          <div style="display:flex;justify-content:flex-end;margin-bottom:14px;">
+            <button class="btn btn-primary" onclick="addSkillGroup()">+ Add Category</button>
+          </div>
+
+          <div id="skillGroupsList"></div>
+
+          <div class="save-bar">
+            <span class="save-bar-text">// Changes apply to portfolio on next page load</span>
+            <button class="btn btn-primary" onclick="saveSkills()">💾 Save Skills</button>
+          </div>
+        </div>
+
+        <!-- ==============================
+           PROJECTS PANEL
+           ============================== -->
+        <div id="panel-projects" class="section-panel">
+          <p class="section-desc">// Add, edit and delete project cards. Each project supports image, tags, features,
+            and links.</p>
+
+          <div style="display:flex;justify-content:flex-end;margin-bottom:14px;">
+            <button class="btn btn-primary" onclick="openProjectModal()">+ Add Project</button>
+          </div>
+
+          <div class="project-list" id="projectList"></div>
+        </div>
+
+        <!-- ==============================
+           SERVICES PANEL
+           ============================== -->
+        <div id="panel-services" class="section-panel">
+          <p class="section-desc">// Edit the services you offer. Shown as a checklist on the portfolio.</p>
+
+          <div style="display:flex;justify-content:flex-end;margin-bottom:14px;">
+            <button class="btn btn-primary" onclick="openServiceModal()">+ Add Service</button>
+          </div>
+
+          <div class="service-list" id="serviceList"></div>
+        </div>
+
+        <!-- ==============================
+           EXPERIENCE PANEL
+           ============================== -->
+        <div id="panel-experience" class="section-panel">
+          <p class="section-desc">// Edit the experience section shown on the portfolio.</p>
+
+          <div class="panel">
+            <div class="panel-header"><span class="panel-title">💼 Experience Entry</span></div>
+            <div class="panel-body">
+              <div class="field-group">
+                <label>Title</label>
+                <input id="expTitle" type="text" placeholder="e.g. Personal & Portfolio Projects" />
+              </div>
+              <div class="field-group">
+                <label>Description</label>
+                <textarea id="expBody" placeholder="Describe your experience…" style="min-height:120px;"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="save-bar">
+            <span class="save-bar-text">// Changes apply to portfolio on next page load</span>
+            <button class="btn btn-primary" onclick="saveExperience()">💾 Save Experience</button>
+          </div>
+        </div>
+
+        <!-- ==============================
+           TESTIMONIALS PANEL
+           ============================== -->
+        <div id="panel-testimonials" class="section-panel">
+          <p class="section-desc">// Manage client testimonials. Add, edit and delete reviews.</p>
+
+          <div style="display:flex;justify-content:flex-end;margin-bottom:14px;">
+            <button class="btn btn-primary" onclick="openTestModal()">+ Add Testimonial</button>
+          </div>
+
+          <div class="test-list" id="testList"></div>
+        </div>
+
+        <!-- ==============================
+           CONTACT PANEL
+           ============================== -->
+        <div id="panel-contact" class="section-panel">
+          <p class="section-desc">// Update your contact links and details shown in the contact section.</p>
+
+          <div class="panel">
+            <div class="panel-header"><span class="panel-title">📬 Contact Info</span></div>
+            <div class="panel-body">
+              <div class="form-row">
+                <div class="field-group"><label>Display Name</label><input id="ctName" type="text" /></div>
+                <div class="field-group"><label>Email Address</label><input id="ctEmail" type="email" /></div>
+              </div>
+              <div class="form-row">
+                <div class="field-group"><label>Phone Number</label><input id="ctPhone" type="text"
+                    placeholder="+91 9999999999" /></div>
+                <div class="field-group"><label>WhatsApp Link</label><input id="ctWhatsapp" type="url"
+                    placeholder="https://wa.me/91..." /></div>
+              </div>
+              <div class="form-row">
+                <div class="field-group"><label>LinkedIn URL</label><input id="ctLinkedin" type="url" /></div>
+                <div class="field-group"><label>LinkedIn Label</label><input id="ctLinkedinLabel" type="text"
+                    placeholder="linkedin.com/in/..." /></div>
+              </div>
+              <div class="form-row">
+                <div class="field-group"><label>GitHub URL</label><input id="ctGithub" type="url" /></div>
+                <div class="field-group"><label>GitHub Label</label><input id="ctGithubLabel" type="text"
+                    placeholder="github.com/..." /></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="save-bar">
+            <span class="save-bar-text">// Changes apply to portfolio on next page load</span>
+            <button class="btn btn-primary" onclick="saveContact()">💾 Save Contact Info</button>
+          </div>
+        </div>
+
+        <!-- ==============================
+           SETTINGS PANEL
+           ============================== -->
+        <div id="panel-settings" class="section-panel">
+          <p class="section-desc">// Admin settings — export/import your data as JSON backup, or reset everything to
+            defaults.</p>
+
+          <div class="panel" style="margin-bottom:20px;">
+            <div class="panel-header"><span class="panel-title">💾 Data Management</span></div>
+            <div class="panel-body">
+              <p style="color:var(--text2);font-size:13px;margin-bottom:18px;">Export your portfolio data as a JSON file
+                for backup, or import a previously saved backup.</p>
+              <div style="display:flex;gap:12px;flex-wrap:wrap;">
+                <button class="btn btn-success" onclick="exportData()">⬇️ Export Data (JSON)</button>
+                <label class="btn btn-amber" style="cursor:pointer;">
+                  ⬆️ Import Data (JSON)
+                  <input type="file" accept=".json" style="display:none" onchange="importData(event)">
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel" style="border-color:rgba(239,68,68,0.2);">
+            <div class="panel-header" style="background:rgba(239,68,68,0.05);"><span class="panel-title"
+                style="color:var(--red);">⚠️ Danger Zone</span></div>
+            <div class="panel-body">
+              <p style="color:var(--text2);font-size:13px;margin-bottom:18px;">Reset all portfolio content back to the
+                original default values. This cannot be undone.</p>
+              <button class="btn btn-danger" onclick="resetAllData()">🔄 Reset All Data to Defaults</button>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /content-area -->
+    </div><!-- /main -->
+  </div><!-- /app -->
+
+  <!-- ============================================================
+     TOAST CONTAINER
+     ============================================================ -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- ============================================================
+     PROJECT MODAL
+     ============================================================ -->
+  <div class="modal-overlay" id="projModal">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title" id="projModalTitle">Add Project</span>
+        <button class="modal-close" onclick="closeModal('projModal')">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="field-group">
+            <label>Project Title *</label>
+            <input id="projTitle" type="text" placeholder="e.g. Hotel Booking Website" />
+          </div>
+          <div class="field-group">
+            <label>Category * <span style="color:var(--text3);font-size:10px;">(used for filter)</span></label>
+            <input id="projCategory" type="text" placeholder="e.g. hotel-booking" />
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Description</label>
+          <textarea id="projDesc" placeholder="Short project description…" style="min-height:80px;"></textarea>
+        </div>
+        <div class="field-group">
+          <label>Image Path / URL</label>
+          <input id="projImage" type="text" placeholder="img/my-project.png or https://..." />
+          <div class="hint">Use a relative path (e.g. img/hotel-img.png) or a full URL</div>
+        </div>
+        <div class="form-row">
+          <div class="field-group">
+            <label>Live Demo URL</label>
+            <input id="projLive" type="url" placeholder="https://..." />
+          </div>
+          <div class="field-group">
+            <label>Source Code URL</label>
+            <input id="projSource" type="url" placeholder="https://github.com/..." />
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Tech Stack — press Enter to add</label>
+          <div class="tag-editor" id="projTechsEditor" onclick="focusTagInput('projTechsEditor')"></div>
+        </div>
+        <div class="field-group">
+          <label>Key Features — press Enter to add</label>
+          <div class="tag-editor" id="projFeaturesEditor" onclick="focusTagInput('projFeaturesEditor')"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="closeModal('projModal')">Cancel</button>
+        <button class="btn btn-primary" onclick="saveProjectModal()">💾 Save Project</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+     SERVICE MODAL
+     ============================================================ -->
+  <div class="modal-overlay" id="svcModal">
+    <div class="modal" style="max-width:480px;">
+      <div class="modal-header">
+        <span class="modal-title" id="svcModalTitle">Add Service</span>
+        <button class="modal-close" onclick="closeModal('svcModal')">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="field-group">
+          <label>Service Title *</label>
+          <input id="svcTitle" type="text" placeholder="e.g. E-commerce Website" />
+        </div>
+        <div class="field-group">
+          <label>Description</label>
+          <textarea id="svcDesc" placeholder="Brief description of the service…" style="min-height:80px;"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="closeModal('svcModal')">Cancel</button>
+        <button class="btn btn-primary" onclick="saveServiceModal()">💾 Save Service</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+     TESTIMONIAL MODAL
+     ============================================================ -->
+  <div class="modal-overlay" id="testModal">
+    <div class="modal" style="max-width:480px;">
+      <div class="modal-header">
+        <span class="modal-title" id="testModalTitle">Add Testimonial</span>
+        <button class="modal-close" onclick="closeModal('testModal')">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="field-group">
+          <label>Quote *</label>
+          <textarea id="testQuote" placeholder='"Great work and fast delivery…"' style="min-height:90px;"></textarea>
+        </div>
+        <div class="field-group">
+          <label>Author</label>
+          <input id="testAuthor" type="text" placeholder="— John Doe" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="closeModal('testModal')">Cancel</button>
+        <button class="btn btn-primary" onclick="saveTestModal()">💾 Save Testimonial</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="admin.js"></script>
+</body>
+
+</html>
