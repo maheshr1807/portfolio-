@@ -6,11 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Panel — Mahesh R Portfolio</title>
   <meta name="robots" content="noindex, nofollow" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="admin.css">
 </head>
 
 <body>
-
 
   <!-- ============================================================
      APP SHELL
@@ -18,10 +18,13 @@
   <div id="app">
 
     <!-- SIDEBAR -->
-    <aside class="sidebar">
+    <aside class="sidebar" id="adminSidebar">
       <div class="sidebar-header">
-        <div class="sidebar-brand">Admin Panel</div>
-        <div class="sidebar-sub">// portfolio.mahesh-r.dev</div>
+        <div class="sidebar-brand">
+          <span class="brand-accent">&lt;</span>Mahesh<span class="brand-accent">/&gt;</span>
+          <span class="admin-badge">Admin</span>
+        </div>
+        <div class="sidebar-sub">// portfolio management system</div>
       </div>
 
       <nav class="sidebar-nav">
@@ -40,12 +43,16 @@
           <span class="nav-icon">🗂️</span> Projects
           <span class="nav-badge" id="badge-projects">0</span>
         </div>
+        <div class="nav-item" data-section="freelancing">
+          <span class="nav-icon">💼</span> Freelancing
+          <span class="nav-badge" id="badge-freelancing">0</span>
+        </div>
         <div class="nav-item" data-section="services">
           <span class="nav-icon">🛠️</span> Services
           <span class="nav-badge" id="badge-services">0</span>
         </div>
         <div class="nav-item" data-section="experience">
-          <span class="nav-icon">💼</span> Experience
+          <span class="nav-icon">📜</span> Experience
         </div>
         <div class="nav-item" data-section="testimonials">
           <span class="nav-icon">💬</span> Testimonials
@@ -62,13 +69,14 @@
       </nav>
 
       <div class="sidebar-footer">
-        <a class="btn-view-site" href="index.html" target="_blank">↗ View Portfolio</a>
+        <a class="btn-view-site" href="index.html" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> View Portfolio</a>
       </div>
     </aside>
 
     <!-- MAIN AREA -->
     <div class="main">
       <div class="main-header">
+        <button class="mobile-sidebar-toggle" id="mobileSidebarToggle" aria-label="Toggle Sidebar"><i class="fa-solid fa-bars"></i></button>
         <h1 id="mainTitle"><span class="section-icon">🏠</span> Hero Section</h1>
         <span class="header-path" id="headerPath">portfolio/hero</span>
       </div>
@@ -78,24 +86,31 @@
         <!-- ==============================
            HERO PANEL
            ============================== -->
-
         <div id="panel-hero" class="section-panel active">
-          <p class="section-desc">// Edit the main hero section — name, tagline, typed roles, CTAs, and stack layers.
-          </p>
+          <p class="section-desc">// Edit the main hero section — greeting, name, photo path, tagline, typed roles, and CTAs.</p>
 
           <div class="panel">
             <div class="panel-header">
-              <span class="panel-title">🪪 Identity</span>
+              <span class="panel-title">🪪 Identity & Photo</span>
             </div>
             <div class="panel-body">
               <div class="form-row">
                 <div class="field-group">
-                  <label>Full Name</label>
-                  <input id="heroName" type="text" placeholder="Your name" />
+                  <label>Greeting</label>
+                  <input id="heroGreeting" type="text" placeholder="Hello, I'm" />
+                </div>
+                <div class="field-group">
+                  <label>Display Name</label>
+                  <input id="heroName" type="text" placeholder="Mahesh" />
                 </div>
               </div>
               <div class="field-group">
-                <label>Hero Description</label>
+                <label>Profile Photo File Path</label>
+                <input id="heroPhoto" type="text" placeholder="img/profile.jpg" />
+                <div class="hint">Place your image file in the project's img folder (e.g. img/profile.jpg)</div>
+              </div>
+              <div class="field-group">
+                <label>Hero Bio Description</label>
                 <textarea id="heroDesc" placeholder="Short intro paragraph…" style="min-height:90px;"></textarea>
               </div>
             </div>
@@ -103,46 +118,48 @@
 
           <div class="panel">
             <div class="panel-header">
-              <span class="panel-title">⌨️ Typed Roles <span class="pill">Tag editor — press Enter to add</span></span>
+              <span class="panel-title">⌨️ Typed Roles <span class="pill">Press Enter to add role</span></span>
             </div>
             <div class="panel-body">
               <div class="field-group">
-                <label>Roles (shown in typing animation)</label>
+                <label>Roles (cycled in the glowing typing animation)</label>
                 <div class="tag-editor" id="heroRolesEditor" onclick="focusTagInput('heroRolesEditor')"></div>
-                <div class="hint">Include quotes: e.g. "Full Stack Developer"</div>
+                <div class="hint">e.g. Full Stack Developer, MERN Stack Developer, Freelance Web Developer</div>
               </div>
             </div>
           </div>
 
           <div class="panel">
             <div class="panel-header">
-              <span class="panel-title">🔘 CTA Buttons</span>
+              <span class="panel-title">🔘 Action CTA Buttons</span>
             </div>
             <div class="panel-body">
               <div class="form-row">
-                <div class="field-group"><label>Primary Button Label</label><input id="heroCta1Label" type="text"
-                    placeholder="$ view-projects" /></div>
-                <div class="field-group"><label>Primary Button Link</label><input id="heroCta1Href" type="url"
-                    placeholder="#projects" /></div>
+                <div class="field-group">
+                  <label>Primary Button Label</label>
+                  <input id="heroCta1Label" type="text" placeholder="Hire Me" />
+                </div>
+                <div class="field-group">
+                  <label>Primary Button Link</label>
+                  <input id="heroCta1Href" type="text" placeholder="#contact" />
+                </div>
               </div>
               <div class="form-row">
-                <div class="field-group"><label>Secondary Button Label</label><input id="heroCta2Label" type="text"
-                    placeholder="$ hire-me" /></div>
-                <div class="field-group"><label>Secondary Button Link</label><input id="heroCta2Href" type="url"
-                    placeholder="#contact" /></div>
-              </div>
-              <div class="form-row">
-                <div class="field-group"><label>Ghost Button Label</label><input id="heroCta3Label" type="text"
-                    placeholder="↓ download-resume" /></div>
-                <div class="field-group"><label>Ghost Button Link</label><input id="heroCta3Href" type="url"
-                    placeholder="#" /></div>
+                <div class="field-group">
+                  <label>Secondary Button Label</label>
+                  <input id="heroCta2Label" type="text" placeholder="View Resume" />
+                </div>
+                <div class="field-group">
+                  <label>Secondary Button Link</label>
+                  <input id="heroCta2Href" type="text" placeholder="./assets/Mahesh_R_Resume.pdf" />
+                </div>
               </div>
             </div>
           </div>
 
           <div class="panel">
             <div class="panel-header">
-              <span class="panel-title">📦 Stack Layers</span>
+              <span class="panel-title">📦 Stack Layers (Tech Accent)</span>
               <button class="btn btn-ghost btn-sm" onclick="addStackLayer()">+ Add Layer</button>
             </div>
             <div class="panel-body">
@@ -151,7 +168,7 @@
           </div>
 
           <div class="save-bar">
-            <span class="save-bar-text">// Changes apply to portfolio on next page load</span>
+            <span class="save-bar-text">// Changes apply to portfolio on save</span>
             <button class="btn btn-primary" onclick="saveHero()">💾 Save Hero Section</button>
           </div>
         </div>
@@ -160,7 +177,7 @@
            ABOUT PANEL
            ============================== -->
         <div id="panel-about" class="section-panel">
-          <p class="section-desc">// Edit the about section — bio paragraphs and info stats.</p>
+          <p class="section-desc">// Edit the about section — professional bio paragraphs and info summary card.</p>
 
           <div class="panel">
             <div class="panel-header">
@@ -169,13 +186,13 @@
             </div>
             <div class="panel-body">
               <div class="para-list" id="paraList"></div>
-              <div class="hint" style="margin-top:8px;">Tip: HTML tags like &lt;b&gt; are supported for bold text.</div>
+              <div class="hint" style="margin-top:8px;">Tip: HTML tags like &lt;strong&gt; are supported for bold text.</div>
             </div>
           </div>
 
           <div class="panel">
             <div class="panel-header">
-              <span class="panel-title">📊 Info Stats (Right Column)</span>
+              <span class="panel-title">📊 Info Stats (Right Info Card)</span>
               <button class="btn btn-ghost btn-sm" onclick="addStatRow()">+ Add Stat</button>
             </div>
             <div class="panel-body">
@@ -184,7 +201,7 @@
           </div>
 
           <div class="save-bar">
-            <span class="save-bar-text">// Changes apply to portfolio on next page load</span>
+            <span class="save-bar-text">// Changes apply to portfolio on save</span>
             <button class="btn btn-primary" onclick="saveAbout()">💾 Save About Section</button>
           </div>
         </div>
@@ -193,7 +210,7 @@
            SKILLS PANEL
            ============================== -->
         <div id="panel-skills" class="section-panel">
-          <p class="section-desc">// Manage skill categories and chips. Type a skill name and press Enter to add it.</p>
+          <p class="section-desc">// Manage technical skills grouped by category. Press Enter in tag editor to add chips.</p>
 
           <div style="display:flex;justify-content:flex-end;margin-bottom:14px;">
             <button class="btn btn-primary" onclick="addSkillGroup()">+ Add Category</button>
@@ -202,7 +219,7 @@
           <div id="skillGroupsList"></div>
 
           <div class="save-bar">
-            <span class="save-bar-text">// Changes apply to portfolio on next page load</span>
+            <span class="save-bar-text">// Changes apply to portfolio on save</span>
             <button class="btn btn-primary" onclick="saveSkills()">💾 Save Skills</button>
           </div>
         </div>
@@ -211,8 +228,7 @@
            PROJECTS PANEL
            ============================== -->
         <div id="panel-projects" class="section-panel">
-          <p class="section-desc">// Add, edit and delete project cards. Each project supports image, tags, features,
-            and links.</p>
+          <p class="section-desc">// Add, edit, and delete personal and academic projects with screenshot images, tech tags, and links.</p>
 
           <div style="display:flex;justify-content:flex-end;margin-bottom:14px;">
             <button class="btn btn-primary" onclick="openProjectModal()">+ Add Project</button>
@@ -222,10 +238,23 @@
         </div>
 
         <!-- ==============================
+           FREELANCING PANEL (NEW)
+           ============================== -->
+        <div id="panel-freelancing" class="section-panel">
+          <p class="section-desc">// Manage client and freelance projects displayed in the dedicated Freelancing section.</p>
+
+          <div style="display:flex;justify-content:flex-end;margin-bottom:14px;">
+            <button class="btn btn-primary" onclick="openFreelanceModal()">+ Add Freelance Project</button>
+          </div>
+
+          <div class="project-list" id="freelanceList"></div>
+        </div>
+
+        <!-- ==============================
            SERVICES PANEL
            ============================== -->
         <div id="panel-services" class="section-panel">
-          <p class="section-desc">// Edit the services you offer. Shown as a checklist on the portfolio.</p>
+          <p class="section-desc">// Edit the core freelancing services you offer (shown as service cards on the portfolio).</p>
 
           <div style="display:flex;justify-content:flex-end;margin-bottom:14px;">
             <button class="btn btn-primary" onclick="openServiceModal()">+ Add Service</button>
@@ -238,10 +267,10 @@
            EXPERIENCE PANEL
            ============================== -->
         <div id="panel-experience" class="section-panel">
-          <p class="section-desc">// Edit the experience section shown on the portfolio.</p>
+          <p class="section-desc">// Edit the experience and background summary shown on your portfolio.</p>
 
           <div class="panel">
-            <div class="panel-header"><span class="panel-title">💼 Experience Entry</span></div>
+            <div class="panel-header"><span class="panel-title">💼 Experience Summary</span></div>
             <div class="panel-body">
               <div class="field-group">
                 <label>Title</label>
@@ -255,7 +284,7 @@
           </div>
 
           <div class="save-bar">
-            <span class="save-bar-text">// Changes apply to portfolio on next page load</span>
+            <span class="save-bar-text">// Changes apply to portfolio on save</span>
             <button class="btn btn-primary" onclick="saveExperience()">💾 Save Experience</button>
           </div>
         </div>
@@ -264,7 +293,7 @@
            TESTIMONIALS PANEL
            ============================== -->
         <div id="panel-testimonials" class="section-panel">
-          <p class="section-desc">// Manage client testimonials. Add, edit and delete reviews.</p>
+          <p class="section-desc">// Manage client reviews and testimonials.</p>
 
           <div style="display:flex;justify-content:flex-end;margin-bottom:14px;">
             <button class="btn btn-primary" onclick="openTestModal()">+ Add Testimonial</button>
@@ -277,36 +306,32 @@
            CONTACT PANEL
            ============================== -->
         <div id="panel-contact" class="section-panel">
-          <p class="section-desc">// Update your contact links and details shown in the contact section.</p>
+          <p class="section-desc">// Update contact details and profile links displayed in the Contact section.</p>
 
           <div class="panel">
-            <div class="panel-header"><span class="panel-title">📬 Contact Info</span></div>
+            <div class="panel-header"><span class="panel-title">📬 Contact Channels</span></div>
             <div class="panel-body">
               <div class="form-row">
                 <div class="field-group"><label>Display Name</label><input id="ctName" type="text" /></div>
                 <div class="field-group"><label>Email Address</label><input id="ctEmail" type="email" /></div>
               </div>
               <div class="form-row">
-                <div class="field-group"><label>Phone Number</label><input id="ctPhone" type="text"
-                    placeholder="+91 9999999999" /></div>
-                <div class="field-group"><label>WhatsApp Link</label><input id="ctWhatsapp" type="url"
-                    placeholder="https://wa.me/91..." /></div>
+                <div class="field-group"><label>Phone Number</label><input id="ctPhone" type="text" placeholder="+91 9999999999" /></div>
+                <div class="field-group"><label>WhatsApp Link</label><input id="ctWhatsapp" type="url" placeholder="https://wa.me/91..." /></div>
               </div>
               <div class="form-row">
                 <div class="field-group"><label>LinkedIn URL</label><input id="ctLinkedin" type="url" /></div>
-                <div class="field-group"><label>LinkedIn Label</label><input id="ctLinkedinLabel" type="text"
-                    placeholder="linkedin.com/in/..." /></div>
+                <div class="field-group"><label>LinkedIn Label</label><input id="ctLinkedinLabel" type="text" placeholder="linkedin.com/in/..." /></div>
               </div>
               <div class="form-row">
                 <div class="field-group"><label>GitHub URL</label><input id="ctGithub" type="url" /></div>
-                <div class="field-group"><label>GitHub Label</label><input id="ctGithubLabel" type="text"
-                    placeholder="github.com/..." /></div>
+                <div class="field-group"><label>GitHub Label</label><input id="ctGithubLabel" type="text" placeholder="github.com/..." /></div>
               </div>
             </div>
           </div>
 
           <div class="save-bar">
-            <span class="save-bar-text">// Changes apply to portfolio on next page load</span>
+            <span class="save-bar-text">// Changes apply to portfolio on save</span>
             <button class="btn btn-primary" onclick="saveContact()">💾 Save Contact Info</button>
           </div>
         </div>
@@ -315,14 +340,12 @@
            SETTINGS PANEL
            ============================== -->
         <div id="panel-settings" class="section-panel">
-          <p class="section-desc">// Admin settings — export/import your data as JSON backup, or reset everything to
-            defaults.</p>
+          <p class="section-desc">// Backup and data management — export or restore your portfolio data in JSON format.</p>
 
           <div class="panel" style="margin-bottom:20px;">
-            <div class="panel-header"><span class="panel-title">💾 Data Management</span></div>
+            <div class="panel-header"><span class="panel-title">💾 Backup & Restore</span></div>
             <div class="panel-body">
-              <p style="color:var(--text2);font-size:13px;margin-bottom:18px;">Export your portfolio data as a JSON file
-                for backup, or import a previously saved backup.</p>
+              <p style="color:var(--text2);font-size:13.5px;margin-bottom:18px;">Export all portfolio content as a single JSON file, or restore from a previously saved backup.</p>
               <div style="display:flex;gap:12px;flex-wrap:wrap;">
                 <button class="btn btn-success" onclick="exportData()">⬇️ Export Data (JSON)</button>
                 <label class="btn btn-amber" style="cursor:pointer;">
@@ -333,12 +356,10 @@
             </div>
           </div>
 
-          <div class="panel" style="border-color:rgba(239,68,68,0.2);">
-            <div class="panel-header" style="background:rgba(239,68,68,0.05);"><span class="panel-title"
-                style="color:var(--red);">⚠️ Danger Zone</span></div>
+          <div class="panel" style="border-color:rgba(239,68,68,0.25);">
+            <div class="panel-header" style="background:rgba(239,68,68,0.06);"><span class="panel-title" style="color:var(--red);">⚠️ Danger Zone</span></div>
             <div class="panel-body">
-              <p style="color:var(--text2);font-size:13px;margin-bottom:18px;">Reset all portfolio content back to the
-                original default values. This cannot be undone.</p>
+              <p style="color:var(--text2);font-size:13.5px;margin-bottom:18px;">Reset all portfolio content back to the default original portfolio state.</p>
               <button class="btn btn-danger" onclick="resetAllData()">🔄 Reset All Data to Defaults</button>
             </div>
           </div>
@@ -369,7 +390,7 @@
             <input id="projTitle" type="text" placeholder="e.g. Hotel Booking Website" />
           </div>
           <div class="field-group">
-            <label>Category * <span style="color:var(--text3);font-size:10px;">(used for filter)</span></label>
+            <label>Category * <span style="color:var(--text3);font-size:10px;">(filter key)</span></label>
             <input id="projCategory" type="text" placeholder="e.g. hotel-booking" />
           </div>
         </div>
@@ -379,8 +400,8 @@
         </div>
         <div class="field-group">
           <label>Image Path / URL</label>
-          <input id="projImage" type="text" placeholder="img/my-project.png or https://..." />
-          <div class="hint">Use a relative path (e.g. img/hotel-img.png) or a full URL</div>
+          <input id="projImage" type="text" placeholder="img/hotel-img.png" />
+          <div class="hint">Relative path in img/ or full URL</div>
         </div>
         <div class="form-row">
           <div class="field-group">
@@ -409,6 +430,56 @@
   </div>
 
   <!-- ============================================================
+     FREELANCE PROJECT MODAL (NEW)
+     ============================================================ -->
+  <div class="modal-overlay" id="freelanceModal">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title" id="freelanceModalTitle">Add Freelance Project</span>
+        <button class="modal-close" onclick="closeModal('freelanceModal')">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="field-group">
+            <label>Project Title *</label>
+            <input id="flTitle" type="text" placeholder="e.g. Karthika Catering Service" />
+          </div>
+          <div class="field-group">
+            <label>Client / Business Name *</label>
+            <input id="flClient" type="text" placeholder="e.g. Karthika Catering" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field-group">
+            <label>Service / Category Badge</label>
+            <input id="flCategory" type="text" placeholder="e.g. Business Website or Website Development" />
+          </div>
+          <div class="field-group">
+            <label>Image Path / URL</label>
+            <input id="flImage" type="text" placeholder="img/catering-img.png" />
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Project Description</label>
+          <textarea id="flDesc" placeholder="Describe the client solution delivered…" style="min-height:80px;"></textarea>
+        </div>
+        <div class="field-group">
+          <label>Live Website URL</label>
+          <input id="flLive" type="url" placeholder="https://..." />
+        </div>
+        <div class="field-group">
+          <label>Technologies Used — press Enter to add</label>
+          <div class="tag-editor" id="flTechsEditor" onclick="focusTagInput('flTechsEditor')"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="closeModal('freelanceModal')">Cancel</button>
+        <button class="btn btn-primary" onclick="saveFreelanceModal()">💾 Save Freelance Project</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
      SERVICE MODAL
      ============================================================ -->
   <div class="modal-overlay" id="svcModal">
@@ -420,7 +491,7 @@
       <div class="modal-body">
         <div class="field-group">
           <label>Service Title *</label>
-          <input id="svcTitle" type="text" placeholder="e.g. E-commerce Website" />
+          <input id="svcTitle" type="text" placeholder="e.g. Business Website" />
         </div>
         <div class="field-group">
           <label>Description</label>

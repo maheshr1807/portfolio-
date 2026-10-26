@@ -1,6 +1,7 @@
 // ============================================================
 // admin.js — Portfolio Admin Panel (Backend API version)
 // All data reads/writes go through /api/portfolio
+// Theme: Dark Navy & Coral Orange matching portfolio design
 // ============================================================
 
 const API_URL = '/api/portfolio';
@@ -14,13 +15,20 @@ async function loadFromServer() {
     const json = await res.json();
     if (json.success && json.data) {
       _data = json.data;
+      if (!_data.freelancingProjects || _data.freelancingProjects.length === 0) {
+        _data.freelancingProjects = (window.DEFAULT_DATA && window.DEFAULT_DATA.freelancingProjects) ? JSON.parse(JSON.stringify(window.DEFAULT_DATA.freelancingProjects)) : [];
+      }
+      if (_data.hero) {
+        if (!_data.hero.greeting) _data.hero.greeting = "Hello, I'm";
+        if (!_data.hero.photo) _data.hero.photo = "img/profile.jpg";
+      }
     } else {
       _data = JSON.parse(JSON.stringify(DEFAULT_DATA));
     }
   } catch (err) {
     console.error('Failed to load from server:', err);
     _data = JSON.parse(JSON.stringify(DEFAULT_DATA));
-    showBanner('⚠️ Cannot reach server. Is it running? (node server.js)', 'error');
+    showBanner('⚠️ Cannot reach server. Is it running? (npm run dev)', 'error');
   }
 }
 
@@ -68,13 +76,13 @@ function setSaveState(saving) {
   });
 }
 
-// ---- Toast ----
+// ---- Toast Notification ----
 function toast(msg, type = 'success') {
   const container = document.getElementById('toastContainer');
   if (!container) return;
   const el = document.createElement('div');
   el.className = `toast ${type}`;
-  el.textContent = msg;
+  el.innerHTML = msg;
   container.appendChild(el);
   setTimeout(() => el.remove(), 3500);
 }
@@ -89,8 +97,8 @@ function showBanner(msg, type = 'info') {
       position:fixed; top:0; left:0; right:0; z-index:9999;
       padding:10px 20px; font-family:var(--font-mono); font-size:13px;
       display:flex; align-items:center; justify-content:space-between;
-      background:${type === 'error' ? 'rgba(239,68,68,0.95)' : 'rgba(0,229,255,0.95)'};
-      color:${type === 'error' ? '#fff' : '#000'};
+      background:${type === 'error' ? 'rgba(239,68,68,0.95)' : 'rgba(255,102,89,0.95)'};
+      color:#fff; box-shadow: 0 4px 16px rgba(0,0,0,0.3);
     `;
     banner.innerHTML = `<span>${msg}</span><button onclick="this.parentElement.remove()" style="background:none;border:none;cursor:pointer;font-size:18px;color:inherit;">×</button>`;
     document.body.prepend(banner);
@@ -110,33 +118,45 @@ function navigate(section) {
   document.querySelectorAll('.section-panel').forEach(el =>
     el.classList.toggle('active', el.id === 'panel-' + section)
   );
+
   const titles = {
-    hero: '🏠 Hero Section', about: '👤 About Section',
-    skills: '⚡ Skills Section', projects: '🗂️ Projects',
-    services: '🛠️ Services', experience: '💼 Experience',
-    testimonials: '💬 Testimonials', contact: '📬 Contact Info',
+    hero: '🏠 Hero Section',
+    about: '👤 About Section',
+    skills: '⚡ Skills Section',
+    projects: '🗂️ Projects',
+    freelancing: '💼 Freelancing Projects',
+    services: '🛠️ Freelance Services',
+    experience: '📜 Experience Summary',
+    testimonials: '💬 Testimonials',
+    contact: '📬 Contact Info',
     settings: '⚙️ Settings'
   };
+
   const el = document.getElementById('mainTitle');
-  if (el) el.textContent = titles[section] || section;
+  if (el) el.innerHTML = titles[section] || section;
   const pathEl = document.getElementById('headerPath');
   if (pathEl) pathEl.textContent = `portfolio / ${section}`;
+
+  // Close mobile sidebar if open
+  const sidebar = document.getElementById('adminSidebar');
+  if (sidebar) sidebar.classList.remove('open');
+
   renderCurrentSection();
 }
 
 // ================================================================
-// HERO
+// HERO PANEL
 // ================================================================
 function renderHeroPanel() {
   const d = getData().hero || {};
-  setValue('heroName', d.name);
-  setValue('heroDesc', d.description);
-  setValue('heroCta1Label', d.ctaPrimary?.label);
-  setValue('heroCta1Href',  d.ctaPrimary?.href);
-  setValue('heroCta2Label', d.ctaSecondary?.label);
-  setValue('heroCta2Href',  d.ctaSecondary?.href);
-  setValue('heroCta3Label', d.ctaGhost?.label);
-  setValue('heroCta3Href',  d.ctaGhost?.href);
+  setValue('heroGreeting', d.greeting || "Hello, I'm");
+  setValue('heroName', d.name || 'Mahesh');
+  setValue('heroPhoto', d.photo || 'img/profile.jpg');
+  setValue('heroDesc', d.description || '');
+  setValue('heroCta1Label', d.ctaPrimary?.label || 'Hire Me');
+  setValue('heroCta1Href',  d.ctaPrimary?.href || '#contact');
+  setValue('heroCta2Label', d.ctaSecondary?.label || 'View Resume');
+  setValue('heroCta2Href',  d.ctaSecondary?.href || './assets/Mahesh_R_Resume.pdf');
   renderTagEditor('heroRolesEditor', d.roles || []);
   renderStackLayers(d.stackLayers || []);
 }
@@ -144,13 +164,22 @@ function renderHeroPanel() {
 async function saveHero() {
   const data = getData();
   if (!data.hero) data.hero = {};
+  data.hero.greeting    = getVal('heroGreeting');
   data.hero.name        = getVal('heroName');
+  data.hero.photo       = getVal('heroPhoto');
   data.hero.description = getVal('heroDesc');
   data.hero.ctaPrimary   = { label: getVal('heroCta1Label'), href: getVal('heroCta1Href') };
   data.hero.ctaSecondary = { label: getVal('heroCta2Label'), href: getVal('heroCta2Href') };
-  data.hero.ctaGhost     = { label: getVal('heroCta3Label'), href: getVal('heroCta3Href') };
   data.hero.roles        = getTagsFromEditor('heroRolesEditor');
   data.hero.stackLayers  = collectStackLayers();
+  if (!data.hero.slideshow) {
+    data.hero.slideshow = [
+      'public/images/profile/mahesh-1.jpeg',
+      'public/images/profile/mahesh-2.jpeg',
+      'public/images/profile/mahesh-3.jpeg',
+      'public/images/profile/mahesh-4.jpeg'
+    ];
+  }
   setData(data);
   await persist('Hero section saved!');
 }
@@ -161,9 +190,9 @@ function renderStackLayers(layers) {
   c.innerHTML = '';
   layers.forEach((l, i) => {
     const row = document.createElement('div');
-    row.className = 'stat-row-item';
+    row.className = 'stat-item';
     row.innerHTML = `
-      <input type="text" placeholder="Label (e.g. FRONTEND)" value="${esc(l.label)}" data-field="label">
+      <input type="text" placeholder="Label (e.g. FRONTEND)" value="${esc(l.label)}" data-field="label" style="width:130px;">
       <input type="text" placeholder="Tech (e.g. React + Tailwind)" value="${esc(l.tech)}" data-field="tech" style="flex:2">
       <button class="btn btn-danger btn-sm btn-icon" onclick="removeStackLayer(${i})">✕</button>
     `;
@@ -174,14 +203,14 @@ function renderStackLayers(layers) {
 function addStackLayer() { renderStackLayers([...collectStackLayers(), { label: '', tech: '' }]); }
 function removeStackLayer(i) { const l = collectStackLayers(); l.splice(i, 1); renderStackLayers(l); }
 function collectStackLayers() {
-  return Array.from(document.querySelectorAll('#stackLayersList .stat-row-item')).map(row => ({
+  return Array.from(document.querySelectorAll('#stackLayersList .stat-item')).map(row => ({
     label: row.querySelector('[data-field="label"]').value.trim(),
     tech:  row.querySelector('[data-field="tech"]').value.trim()
   }));
 }
 
 // ================================================================
-// ABOUT
+// ABOUT PANEL
 // ================================================================
 function renderAboutPanel() {
   const d = getData().about || {};
@@ -213,10 +242,10 @@ function renderStatRows(stats) {
   list.innerHTML = '';
   stats.forEach((s, i) => {
     const row = document.createElement('div');
-    row.className = 'stat-row-item';
+    row.className = 'stat-item';
     row.innerHTML = `
-      <input type="text" placeholder="Key (e.g. location)" value="${esc(s.label)}" data-field="label">
-      <input type="text" placeholder="Value (e.g. Salem, IN)" value="${esc(s.value)}" data-field="value">
+      <input type="text" placeholder="Key (e.g. Education)" value="${esc(s.label)}" data-field="label" style="width:130px;">
+      <input type="text" placeholder="Value (e.g. B.E. Computer Science)" value="${esc(s.value)}" data-field="value" style="flex:1;">
       <button class="btn btn-danger btn-sm btn-icon" onclick="removeStatRow(${i})">✕</button>
     `;
     list.appendChild(row);
@@ -224,7 +253,7 @@ function renderStatRows(stats) {
 }
 
 function collectStatRows() {
-  return Array.from(document.querySelectorAll('#statList .stat-row-item')).map(row => ({
+  return Array.from(document.querySelectorAll('#statList .stat-item')).map(row => ({
     label: row.querySelector('[data-field="label"]').value.trim(),
     value: row.querySelector('[data-field="value"]').value.trim()
   })).filter(r => r.label || r.value);
@@ -242,65 +271,72 @@ async function saveAbout() {
 }
 
 // ================================================================
-// SKILLS
+// SKILLS PANEL
 // ================================================================
 function renderSkillsPanel() {
   const skills    = getData().skills || [];
   const container = document.getElementById('skillGroupsList');
   if (!container) return;
-  container.innerHTML = '';
-  skills.forEach((group, gi) => {
-    const el = document.createElement('div');
-    el.className  = 'skill-group';
-    el.dataset.gi = gi;
-    el.innerHTML = `
-      <div class="skill-group-header">
-        <input class="skill-group-name-input" type="text" value="${esc(group.category)}" placeholder="Category name">
-        <button class="btn btn-danger btn-sm" onclick="removeSkillGroup(${gi})">Remove Group</button>
+  updateBadge('skills', skills.length);
+
+  container.innerHTML = skills.map((g, i) => `
+    <div class="panel" style="margin-bottom:14px;" data-gi="${i}">
+      <div class="panel-header">
+        <div style="display:flex;align-items:center;gap:10px;flex:1;">
+          <input type="text" value="${esc(g.category)}"
+            style="background:transparent;border:none;border-bottom:1px solid var(--border);color:#fff;font-weight:700;font-size:14px;padding:3px 6px;width:180px;"
+            placeholder="Category Name" onchange="updateSkillCategory(${i}, this.value)">
+          <span style="font-size:11px;color:var(--text3);font-family:var(--font-mono);">${(g.chips || []).length} skills</span>
+        </div>
+        <button class="btn btn-danger btn-sm btn-icon" onclick="removeSkillGroup(${i})">✕</button>
       </div>
-      <div class="field-group">
-        <label>Skills — type and press Enter to add</label>
-        <div class="tag-editor" id="skillChips_${gi}" onclick="focusTagInput('skillChips_${gi}')"></div>
+      <div class="panel-body">
+        <div class="tag-editor" id="sg-${i}" onclick="focusTagInput('sg-${i}')"></div>
       </div>
-    `;
-    container.appendChild(el);
-    renderTagEditor('skillChips_' + gi, group.chips || []);
+    </div>
+  `).join('');
+
+  skills.forEach((g, i) => {
+    renderTagEditor(`sg-${i}`, g.chips || []);
   });
 }
 
-async function addSkillGroup() {
+function addSkillGroup() {
   const data = getData();
   if (!data.skills) data.skills = [];
   data.skills.push({ category: 'New Category', chips: [] });
   setData(data);
   renderSkillsPanel();
-  updateBadges();
 }
 
-async function removeSkillGroup(gi) {
-  if (!confirm('Remove this skill group?')) return;
+function removeSkillGroup(i) {
+  if (!confirm('Remove this skill category?')) return;
   const data = getData();
-  data.skills.splice(gi, 1);
+  data.skills.splice(i, 1);
   setData(data);
-  await persist('Skill group removed');
   renderSkillsPanel();
-  updateBadges();
+}
+
+function updateSkillCategory(i, val) {
+  const data = getData();
+  if (data.skills && data.skills[i]) {
+    data.skills[i].category = val.trim();
+    setData(data);
+  }
 }
 
 async function saveSkills() {
-  const data   = getData();
-  const groups = document.querySelectorAll('#skillGroupsList .skill-group');
-  data.skills  = Array.from(groups).map((g, gi) => ({
-    category: g.querySelector('.skill-group-name-input').value.trim(),
-    chips:    getTagsFromEditor('skillChips_' + gi)
-  }));
+  const data = getData();
+  (data.skills || []).forEach((g, i) => {
+    g.chips = getTagsFromEditor(`sg-${i}`);
+  });
   setData(data);
   await persist('Skills saved!');
-  updateBadges();
+  renderSkillsPanel();
 }
 
 // ================================================================
-// PROJECTS
+// PROJECTS PANEL
 // ================================================================
 function renderProjectsPanel() {
   const projects = getData().projects || [];
@@ -309,12 +345,13 @@ function renderProjectsPanel() {
   if (!list) return;
 
   if (!projects.length) {
-    list.innerHTML = `<div class="empty-state"><div class="empty-icon">📂</div>No projects yet. Click "+ Add Project"!</div>`;
+    list.innerHTML = `<div class="empty-state"><div class="empty-icon">🗂️</div>No projects yet.</div>`;
     return;
   }
+
   list.innerHTML = projects.map(p => `
     <div class="proj-item" data-id="${p.id}">
-      <img class="proj-item-thumb" src="${esc(p.image || '')}" alt="" onerror="this.src='';this.style.background='var(--bg4)'">
+      <img class="proj-item-thumb" src="${esc(p.image)}" alt="${esc(p.title)}" onerror="this.src=''; this.style.display='none';">
       <div class="proj-item-info">
         <div class="proj-item-title">${esc(p.title)}</div>
         <div class="proj-item-cat">${esc(p.category)}</div>
@@ -349,8 +386,8 @@ function editProject(id) { openProjectModal(id); }
 
 async function deleteProject(id) {
   if (!confirm('Delete this project?')) return;
-  const data     = getData();
-  data.projects  = (data.projects || []).filter(p => p.id !== id);
+  const data = getData();
+  data.projects = (data.projects || []).filter(p => p.id !== id);
   setData(data);
   await persist('Project deleted');
   renderProjectsPanel();
@@ -392,7 +429,98 @@ async function saveProjectModal() {
 }
 
 // ================================================================
-// SERVICES
+// FREELANCING PANEL (NEW)
+// ================================================================
+function renderFreelancePanel() {
+  const listEl = document.getElementById('freelanceList');
+  if (!listEl) return;
+  const freelanceProjects = getData().freelancingProjects || [];
+  updateBadge('freelancing', freelanceProjects.length);
+
+  if (!freelanceProjects.length) {
+    listEl.innerHTML = `<div class="empty-state" style="text-align:center;padding:40px;color:var(--text3);font-family:var(--font-mono);"><div style="font-size:36px;margin-bottom:12px;">💼</div>No freelance projects yet. Click "+ Add Freelance Project" to add one.</div>`;
+    return;
+  }
+
+  listEl.innerHTML = freelanceProjects.map(p => `
+    <div class="proj-item" data-id="${p.id}">
+      <img class="proj-item-thumb" src="${esc(p.image)}" alt="${esc(p.title)}" onerror="this.src=''; this.style.display='none';">
+      <div class="proj-item-info">
+        <div class="proj-item-title">${esc(p.title)} <span style="font-size:12px;color:var(--text3);font-weight:400;">(${esc(p.client || 'Client')})</span></div>
+        <div class="proj-item-cat">${esc(p.category || 'Website Development')}</div>
+        <div class="proj-item-desc">${esc(p.description)}</div>
+      </div>
+      <div class="proj-item-actions">
+        <button class="btn btn-ghost btn-sm" onclick="editFreelance('${p.id}')">✏️ Edit</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteFreelance('${p.id}')">🗑️</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+let _editingFreelanceId = null;
+
+function openFreelanceModal(id) {
+  _editingFreelanceId = id || null;
+  const p = id ? (getData().freelancingProjects || []).find(x => x.id === id) : null;
+  document.getElementById('freelanceModalTitle').textContent = id ? 'Edit Freelance Project' : 'Add Freelance Project';
+  setValue('flTitle',    p?.title);
+  setValue('flClient',   p?.client);
+  setValue('flCategory', p?.category || 'Website Development');
+  setValue('flImage',    p?.image);
+  setValue('flDesc',     p?.description);
+  setValue('flLive',     p?.liveLink);
+  renderTagEditor('flTechsEditor', p?.techs || []);
+  document.getElementById('freelanceModal').classList.add('open');
+}
+
+function editFreelance(id) { openFreelanceModal(id); }
+
+async function deleteFreelance(id) {
+  if (!confirm('Delete this freelance project?')) return;
+  const data = getData();
+  data.freelancingProjects = (data.freelancingProjects || []).filter(p => p.id !== id);
+  setData(data);
+  await persist('Freelance project deleted');
+  renderFreelancePanel();
+  updateBadges();
+}
+
+async function saveFreelanceModal() {
+  const title  = getVal('flTitle');
+  const client = getVal('flClient');
+  if (!title)  { toast('Project title is required', 'error'); return; }
+  if (!client) { toast('Client name is required', 'error'); return; }
+
+  const data = getData();
+  if (!data.freelancingProjects) data.freelancingProjects = [];
+
+  const proj = {
+    id:          _editingFreelanceId || uid(),
+    title, client,
+    category:    getVal('flCategory') || 'Website Development',
+    description: getVal('flDesc'),
+    image:       getVal('flImage'),
+    liveLink:    getVal('flLive'),
+    techs:       getTagsFromEditor('flTechsEditor')
+  };
+
+  if (_editingFreelanceId) {
+    const idx = data.freelancingProjects.findIndex(p => p.id === _editingFreelanceId);
+    if (idx !== -1) data.freelancingProjects[idx] = proj; else data.freelancingProjects.push(proj);
+  } else {
+    data.freelancingProjects.push(proj);
+  }
+
+  setData(data);
+  await persist(_editingFreelanceId ? 'Freelance project updated!' : 'Freelance project added!');
+  closeModal('freelanceModal');
+  renderFreelancePanel();
+  updateBadges();
+}
+
+// ================================================================
+// SERVICES PANEL
 // ================================================================
 function renderServicesPanel() {
   const services = getData().services || [];
@@ -406,12 +534,11 @@ function renderServicesPanel() {
   }
   list.innerHTML = services.map((s, i) => `
     <div class="service-item-row" data-idx="${i}">
-      <span class="drag-handle">⠿</span>
-      <div class="service-item-row-body">
-        <div class="service-item-row-title">${esc(s.title)}</div>
-        <div class="service-item-row-desc">${esc(s.desc)}</div>
+      <div style="flex:1;">
+        <div style="font-weight:700;font-size:14.5px;color:#fff;margin-bottom:4px;">${esc(s.title)}</div>
+        <div style="font-size:13px;color:var(--text2);">${esc(s.desc)}</div>
       </div>
-      <div class="service-item-row-actions">
+      <div style="display:flex;gap:8px;">
         <button class="btn btn-ghost btn-sm" onclick="editService(${i})">✏️</button>
         <button class="btn btn-danger btn-sm" onclick="deleteService(${i})">🗑️</button>
       </div>
@@ -458,7 +585,7 @@ async function saveServiceModal() {
 }
 
 // ================================================================
-// EXPERIENCE
+// EXPERIENCE PANEL
 // ================================================================
 function renderExperiencePanel() {
   const d = getData().experience || {};
@@ -476,7 +603,7 @@ async function saveExperience() {
 }
 
 // ================================================================
-// TESTIMONIALS
+// TESTIMONIALS PANEL
 // ================================================================
 function renderTestimonialsPanel() {
   const testimonials = getData().testimonials || [];
@@ -489,12 +616,12 @@ function renderTestimonialsPanel() {
     return;
   }
   list.innerHTML = testimonials.map((t, i) => `
-    <div class="test-item" data-idx="${i}">
-      <div class="test-item-body">
-        <div class="test-item-quote">${esc(t.quote)}</div>
-        <div class="test-item-author">${esc(t.author)}</div>
+    <div class="test-item-row" data-idx="${i}">
+      <div style="flex:1;">
+        <div style="font-size:14px;color:#fff;font-style:italic;margin-bottom:6px;">${esc(t.quote)}</div>
+        <div style="font-size:12px;color:var(--accent);font-family:var(--font-mono);">${esc(t.author)}</div>
       </div>
-      <div class="test-item-actions">
+      <div style="display:flex;gap:8px;">
         <button class="btn btn-ghost btn-sm" onclick="editTestimonial(${i})">✏️</button>
         <button class="btn btn-danger btn-sm" onclick="deleteTestimonial(${i})">🗑️</button>
       </div>
@@ -541,109 +668,113 @@ async function saveTestModal() {
 }
 
 // ================================================================
-// CONTACT
+// CONTACT PANEL
 // ================================================================
 function renderContactPanel() {
   const d = getData().contact || {};
-  setValue('ctName',         d.name);
-  setValue('ctEmail',        d.email);
-  setValue('ctPhone',        d.phone);
-  setValue('ctLinkedin',     d.linkedin);
-  setValue('ctLinkedinLabel',d.linkedinLabel);
-  setValue('ctGithub',       d.github);
-  setValue('ctGithubLabel',  d.githubLabel);
-  setValue('ctWhatsapp',     d.whatsapp);
+  setValue('ctName',          d.name);
+  setValue('ctEmail',         d.email);
+  setValue('ctPhone',         d.phone);
+  setValue('ctWhatsapp',      d.whatsapp);
+  setValue('ctLinkedin',      d.linkedin);
+  setValue('ctLinkedinLabel', d.linkedinLabel);
+  setValue('ctGithub',        d.github);
+  setValue('ctGithubLabel',   d.githubLabel);
 }
 
 async function saveContact() {
-  const data    = getData();
-  data.contact  = {
+  const data = getData();
+  data.contact = {
     name:          getVal('ctName'),
     email:         getVal('ctEmail'),
     phone:         getVal('ctPhone'),
+    whatsapp:      getVal('ctWhatsapp'),
     linkedin:      getVal('ctLinkedin'),
     linkedinLabel: getVal('ctLinkedinLabel'),
     github:        getVal('ctGithub'),
-    githubLabel:   getVal('ctGithubLabel'),
-    whatsapp:      getVal('ctWhatsapp')
+    githubLabel:   getVal('ctGithubLabel')
   };
   setData(data);
   await persist('Contact info saved!');
 }
 
 // ================================================================
-// SETTINGS
+// SETTINGS PANEL
 // ================================================================
-function renderSettingsPanel() { /* static panel — nothing to populate */ }
-
-async function resetAllData() {
-  if (!confirm('Reset ALL portfolio content to defaults? This cannot be undone.')) return;
-  try {
-    const res  = await fetch('/api/portfolio/reset', { method: 'POST' });
-    const json = await res.json();
-    if (json.success) {
-      await loadFromServer();
-      renderCurrentSection();
-      updateBadges();
-      toast('✓ Data reset to defaults', 'info');
-    }
-  } catch (err) {
-    toast('Reset failed: ' + err.message, 'error');
-  }
-}
+function renderSettingsPanel() {}
 
 function exportData() {
-  const data = getData();
-  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-  const a    = document.createElement('a');
-  a.href     = URL.createObjectURL(blob);
-  a.download = 'portfolio-data-backup.json';
-  a.click();
-  toast('✓ Data exported!');
+  const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(getData(), null, 2));
+  const dlAnchor = document.createElement('a');
+  dlAnchor.setAttribute('href', dataStr);
+  dlAnchor.setAttribute('download', `portfolio-backup-${new Date().toISOString().slice(0,10)}.json`);
+  dlAnchor.click();
 }
 
-async function importData(e) {
+function importData(e) {
   const file = e.target.files[0];
   if (!file) return;
   const reader = new FileReader();
   reader.onload = async (ev) => {
     try {
-      const data = JSON.parse(ev.target.result);
-      setData(data);
+      const parsed = JSON.parse(ev.target.result);
+      setData(parsed);
       await persist('Data imported successfully!');
       renderCurrentSection();
       updateBadges();
-    } catch {
+    } catch (err) {
       toast('Invalid JSON file', 'error');
     }
   };
   reader.readAsText(file);
-  e.target.value = '';
+}
+
+async function resetAllData() {
+  if (!confirm('Are you sure you want to reset all portfolio data to default values? This cannot be undone.')) return;
+  try {
+    const res = await fetch('/api/portfolio/reset', { method: 'POST' });
+    const json = await res.json();
+    if (json.success) {
+      _data = json.data;
+      toast('✓ Reset to defaults!');
+      renderCurrentSection();
+      updateBadges();
+      return;
+    }
+  } catch (err) {
+    // If backend reset fails, reset locally
+  }
+  _data = JSON.parse(JSON.stringify(DEFAULT_DATA));
+  await persist('Reset to defaults');
+  renderCurrentSection();
+  updateBadges();
 }
 
 // ================================================================
-// TAG EDITOR
+// TAG / CHIP EDITOR HELPERS
 // ================================================================
 function renderTagEditor(editorId, tags) {
   const container = document.getElementById(editorId);
   if (!container) return;
   container.innerHTML = '';
-  tags.forEach((tag, i) => {
+
+  (tags || []).forEach((tag, idx) => {
     const span = document.createElement('span');
     span.className = 'tag';
-    span.innerHTML = `${esc(tag)}<span class="tag-remove" onclick="removeTag('${editorId}', ${i})">×</span>`;
+    span.innerHTML = `${esc(tag)} <span class="tag-remove" onclick="removeTag('${editorId}', ${idx})">×</span>`;
     container.appendChild(span);
   });
+
   const input = document.createElement('input');
-  input.className   = 'tag-input';
-  input.placeholder = 'Type & press Enter…';
+  input.className = 'tag-input';
+  input.placeholder = tags.length ? '' : 'Type and press Enter…';
   input.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ',') {
       e.preventDefault();
-      const val = input.value.trim().replace(/,$/, '');
+      const val = input.value.trim().replace(/^,+|,+$/g, '');
       if (val) {
         const current = getTagsFromEditor(editorId);
-        current.push(val);
+        if (!current.includes(val)) current.push(val);
         renderTagEditor(editorId, current);
         setTimeout(() => document.querySelector(`#${editorId} .tag-input`)?.focus(), 0);
       }
@@ -694,16 +825,17 @@ document.addEventListener('click', (e) => {
 // BADGES
 // ================================================================
 function updateBadge(section, count) {
-  const badge = document.querySelector(`.nav-item[data-section="${section}"] .nav-badge`);
+  const badge = document.getElementById(`badge-${section}`);
   if (badge) badge.textContent = count;
 }
 
 function updateBadges() {
   const data = getData();
-  updateBadge('projects',     data.projects?.length    ?? 0);
-  updateBadge('services',     data.services?.length    ?? 0);
-  updateBadge('testimonials', data.testimonials?.length ?? 0);
-  updateBadge('skills',       data.skills?.length       ?? 0);
+  updateBadge('projects',     data.projects?.length            ?? 0);
+  updateBadge('freelancing',  data.freelancingProjects?.length ?? 0);
+  updateBadge('services',     data.services?.length            ?? 0);
+  updateBadge('testimonials', data.testimonials?.length        ?? 0);
+  updateBadge('skills',       data.skills?.length              ?? 0);
 }
 
 // ================================================================
@@ -711,10 +843,15 @@ function updateBadges() {
 // ================================================================
 function renderCurrentSection() {
   const fns = {
-    hero: renderHeroPanel, about: renderAboutPanel,
-    skills: renderSkillsPanel, projects: renderProjectsPanel,
-    services: renderServicesPanel, experience: renderExperiencePanel,
-    testimonials: renderTestimonialsPanel, contact: renderContactPanel,
+    hero: renderHeroPanel,
+    about: renderAboutPanel,
+    skills: renderSkillsPanel,
+    projects: renderProjectsPanel,
+    freelancing: renderFreelancePanel,
+    services: renderServicesPanel,
+    experience: renderExperiencePanel,
+    testimonials: renderTestimonialsPanel,
+    contact: renderContactPanel,
     settings: renderSettingsPanel
   };
   try { fns[currentSection]?.(); }
@@ -744,12 +881,15 @@ function showLoading(on) {
       font-family:var(--font-mono); color:var(--accent); gap:16px;
     `;
     overlay.innerHTML = `
-      <div style="font-size:32px;">⬡</div>
-      <div style="font-size:14px;">// Loading portfolio data…</div>
-      <div style="width:200px;height:2px;background:var(--bg3);border-radius:2px;overflow:hidden;">
+      <div style="font-size:32px;animation:spin 1s linear infinite;">⚙</div>
+      <div style="font-size:14px;color:#fff;">Loading admin panel…</div>
+      <div style="width:200px;height:3px;background:var(--bg3);border-radius:2px;overflow:hidden;">
         <div style="height:100%;background:var(--accent);animation:loadBar 1.2s ease infinite;"></div>
       </div>
-      <style>@keyframes loadBar{0%{width:0;margin-left:0}50%{width:80%;margin-left:10%}100%{width:0;margin-left:100%}}</style>
+      <style>
+        @keyframes spin { 100% { transform:rotate(360deg); } }
+        @keyframes loadBar { 0%{width:0;margin-left:0} 50%{width:80%;margin-left:10%} 100%{width:0;margin-left:100%} }
+      </style>
     `;
     document.body.prepend(overlay);
   } else if (!on && overlay) {
@@ -771,6 +911,15 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.querySelectorAll('.nav-item[data-section]').forEach(el => {
     el.addEventListener('click', () => navigate(el.dataset.section));
   });
+
+  // Mobile sidebar toggle
+  const mobileToggle = document.getElementById('mobileSidebarToggle');
+  const sidebar = document.getElementById('adminSidebar');
+  if (mobileToggle && sidebar) {
+    mobileToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('open');
+    });
+  }
 
   // Start on Hero
   navigate('hero');

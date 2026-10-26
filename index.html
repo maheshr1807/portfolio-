@@ -1,406 +1,303 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Mahesh R — Full Stack Web Developer | MERN Stack Freelancer</title>
-<meta name="description" content="Mahesh R is a Full Stack Web Developer specializing in React, Node.js, Express and MongoDB. Available for freelance web development — e-commerce sites, dashboards, and custom web apps." />
-<meta name="keywords" content="Mahesh R, Full Stack Developer, MERN Stack Developer, React Developer, Node.js Developer, Freelance Web Developer, Coimbatore Developer" />
-<meta property="og:title" content="Mahesh R — Full Stack Web Developer" />
-<meta property="og:description" content="I build fast, responsive, and scalable websites using React, Node.js, Express, and MongoDB." />
-<meta property="og:type" content="website" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mahesh R — Full Stack Developer | MERN Stack Freelancer</title>
+  <meta name="description" content="Mahesh R is a Full Stack Web Developer specializing in React, Node.js, Express and MongoDB. Available for freelance web development." />
+  <meta name="keywords" content="Mahesh R, Full Stack Developer, MERN Stack Developer, React Developer, Node.js Developer, Freelance Web Developer" />
+  <meta property="og:title" content="Mahesh R — Full Stack Web Developer" />
+  <meta property="og:description" content="I build fast, responsive, and scalable websites using React, Node.js, Express, and MongoDB." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css">
+  <link rel="preload" as="image" href="public/images/profile/mahesh-1.jpeg" />
+  <link rel="preload" as="image" href="public/images/profile/mahesh-2.jpeg" />
+  <link rel="preload" as="image" href="public/images/profile/mahesh-3.jpeg" />
+  <link rel="preload" as="image" href="public/images/profile/mahesh-4.jpeg" />
 </head>
 <body>
+  <div id="loader"><div class="loader-ring"></div><div class="loader-text">Loading Portfolio...</div></div>
 
-<div id="loader">
-  <div class="loader-text">$ compiling portfolio.jsx ...</div>
-  <div class="loader-bar"><span></span></div>
-</div>
-
-<header>
-  <nav class="wrap">
-    <div class="brand"><span class="brk">&lt;</span>Mahesh R<span class="brk">/&gt;</span></div>
-    <div class="nav-links" id="navLinks">
-      <a href="#about">about</a>
-      <a href="#skills">skills</a>
-      <a href="#projects">projects</a>
-      <a href="#services">services</a>
-      <a href="#contact">contact</a>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark mode">🌙</button>
-    </div>
-    <button class="nav-mobile-toggle" id="navMobileToggle" aria-label="Open menu">☰</button>
-  </nav>
-</header>
-
-<!-- HERO -->
-<section id="hero">
-  <div class="wrap">
-    <div class="win">
-      <div class="win-bar">
-        <span class="dot" style="background:var(--red-dot)"></span>
-        <span class="dot" style="background:var(--yellow-dot)"></span>
-        <span class="dot" style="background:var(--green-dot)"></span>
-        <span class="win-title">developer.js — ~/portfolio</span>
+  <header id="mainHeader">
+    <nav class="wrap nav-inner">
+      <a href="#hero" class="brand"><span class="brand-accent">&lt;</span>Mahesh<span class="brand-accent">/&gt;</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="#hero" class="nav-link">Home</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#freelancing" class="nav-link">Freelancing</a>
+        <a href="#contact" class="nav-link">Contact</a>
       </div>
-      <div class="hero-grid">
-        <div class="hero-code">
-          <div class="code-line"><span class="code-key">const</span> <span class="code-prop">developer</span> = {</div>
-          <div class="code-line">&nbsp;&nbsp;name: <span class="code-str">"Mahesh R"</span>,</div>
-          <div class="code-line">&nbsp;&nbsp;role: <span id="typed"></span></div>
-          <div class="code-line">};</div>
+      <button class="nav-mobile-toggle" id="navMobileToggle" aria-label="Open menu" aria-expanded="false">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </nav>
+  </header>
 
-          <div class="hero-role">FULL STACK WEB DEVELOPER · MERN STACK</div>
-          <h1 class="hero-name">Mahesh R</h1>
-          <p class="hero-desc">I build fast, responsive, and scalable websites using React, Node.js, Express, and MongoDB — from e-commerce platforms to admin dashboards.</p>
-
-          <div class="hero-ctas">
-            <a href="#projects" class="btn btn-primary">$ view-projects</a>
-            <a href="#contact" class="btn btn-amber">$ hire-me</a>
-            <a href="#" class="btn btn-ghost">↓ download-resume</a>
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg-glow"></div>
+    <div class="wrap hero-grid">
+      <div class="hero-content">
+        <p class="hero-greeting">Hello, I'm</p>
+        <h1 class="hero-name">Mahesh</h1>
+        <div class="hero-role-wrap"><span class="hero-role-typed" id="typedRole"></span></div>
+        <p class="hero-desc">I build responsive web applications and practical digital solutions that help businesses grow online.</p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn btn-coral" id="heroHireBtn">Hire Me</a>
+          <a href="./assets/Mahesh_R_Resume.pdf" class="btn btn-outline" download id="heroResumeBtn">View Resume</a>
+        </div>
+        <div class="hero-socials">
+          <a href="https://github.com/maheshr1807" target="_blank" rel="noopener" class="social-icon" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/mahesh-r-18062006r/" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="mailto:rm683443@gmail.com" class="social-icon" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+          <a href="https://wa.me/919342763246" target="_blank" rel="noopener" class="social-icon" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="hero-photo-wrap">
+        <div class="photo-decorators">
+          <span class="deco-code top-left">&lt;/&gt;</span>
+          <span class="deco-code bottom-right">&lt;.</span>
+        </div>
+        <div class="photo-ring">
+          <div class="photo-ring-inner">
+            <div class="hero-slideshow" id="heroSlideshow" aria-label="Mahesh R hero portrait slideshow">
+              <div class="slide-layer active" data-slide="0">
+                <img src="public/images/profile/mahesh-1.jpeg" alt="Mahesh R — Full Stack Developer (Photo 1)" class="profile-slide-img" />
+              </div>
+              <div class="slide-layer" data-slide="1">
+                <img src="public/images/profile/mahesh-2.jpeg" alt="Mahesh R — Full Stack Developer (Photo 2)" class="profile-slide-img" />
+              </div>
+              <div class="slide-layer" data-slide="2">
+                <img src="public/images/profile/mahesh-3.jpeg" alt="Mahesh R — Full Stack Developer (Photo 3)" class="profile-slide-img" />
+              </div>
+              <div class="slide-layer" data-slide="3">
+                <img src="public/images/profile/mahesh-4.jpeg" alt="Mahesh R — Full Stack Developer (Photo 4)" class="profile-slide-img" />
+              </div>
+              <div class="photo-fallback" id="photoFallback"><i class="fa-solid fa-user"></i><span>Mahesh R</span></div>
+            </div>
           </div>
         </div>
-        <div class="stack">
-          <div class="layer l1"><b>React + Tailwind CSS</b><span>FRONTEND</span></div>
-          <div class="layer l2"><b>Node.js + Express</b><span>BACKEND</span></div>
-          <div class="layer l3"><b>MongoDB + JWT Auth</b><span>DATA & AUTH</span></div>
-          <div class="layer l4"><b>Vercel · Render · Netlify . Gitup</b><span>DEPLOY</span></div>
-        </div>
+        <div class="photo-status-badge"><span class="badge-dot"></span><span>Available for Work</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECH STRIP -->
+  <div class="tech-strip" id="techStrip">
+    <div class="wrap">
+      <div class="tech-strip-label">Technologies I Work With</div>
+      <div class="tech-strip-row">
+        <div class="tech-item"><i class="fa-brands fa-html5" style="color:#E44D26"></i><span>HTML5</span></div>
+        <div class="tech-item"><i class="fa-brands fa-css3-alt" style="color:#264DE4"></i><span>CSS3</span></div>
+        <div class="tech-item"><i class="fa-brands fa-js" style="color:#F7DF1E"></i><span>JavaScript</span></div>
+        <div class="tech-item"><i class="fa-brands fa-react" style="color:#61DAFB"></i><span>React.js</span></div>
+        <div class="tech-item"><i class="fa-brands fa-node-js" style="color:#339933"></i><span>Node.js</span></div>
+        <div class="tech-item"><i class="fa-solid fa-server" style="color:#FF6659"></i><span>Express.js</span></div>
+        <div class="tech-item"><i class="fa-solid fa-database" style="color:#47A248"></i><span>MongoDB</span></div>
+        <div class="tech-item"><i class="fa-brands fa-python" style="color:#3776AB"></i><span>Python</span></div>
+        <div class="tech-item"><i class="fa-brands fa-git-alt" style="color:#F05032"></i><span>Git</span></div>
+        <div class="tech-item"><i class="fa-brands fa-github"></i><span>GitHub</span></div>
       </div>
     </div>
   </div>
-</section>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-label">about-me</div>
-      <h2 class="sec-title">Who I am</h2>
-    </div>
-    <div class="about-grid reveal">
-      <div class="about-text">
-        <p>I'm a <b>Full Stack Web Developer</b> based in Salem, Tamil Nadu, specializing in modern web applications built on the <b>MERN stack</b> (MongoDB, Express, React, Node.js).</p>
-        <p>I design and build e-commerce websites, admin dashboards, business websites, and custom web applications — focused on clean code, solid architecture, and interfaces that actually work well for the people using them.</p>
-        <p>My goal is simple: help businesses and founders turn ideas into fast, reliable, production-ready web products, and keep learning and shipping along the way.</p>
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-label">about me</div>
+        <h2 class="sec-title">Who I Am</h2>
+        <p class="sec-subtitle">A passionate developer turning ideas into reality</p>
       </div>
-      <div class="stat-box">
-        <div class="stat-row"><span>education</span><span>B.E. Computer Science</span></div>
-        <div class="stat-row"><span>location</span><span>Salem, IN</span></div>
-        <div class="stat-row"><span>stack</span><span>MERN</span></div>
-        <div class="stat-row"><span>focus</span><span>Full Stack Dev</span></div>
-        <div class="stat-row"><span>status</span><span>Available for freelance</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section id="skills">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-label">skills</div>
-      <h2 class="sec-title">What I work with</h2>
-    </div>
-    <div class="skill-cols reveal">
-      <div class="skill-card">
-        <h4>Frontend</h4>
-        <div class="chip-row">
-          <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span>
-          <span class="chip">React</span><span class="chip">Tailwind CSS</span><span class="chip">Bootstrap</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <h4>Backend</h4>
-        <div class="chip-row">
-          <span class="chip">Node.js</span><span class="chip">Express.js</span><span class="chip">MongoDB</span>
-          <span class="chip">REST APIs</span><span class="chip">JWT Auth</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <h4>Tools</h4>
-        <div class="chip-row">
-          <span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">Postman</span>
-          <span class="chip">VS Code</span><span class="chip">Vercel</span><span class="chip">Render</span><span class="chip">Netlify</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-label">featured-projects</div>
-      <h2 class="sec-title">Things I've built</h2>
-    </div>
-
-    <div class="filter-row reveal">
-      <button class="filter-btn active" data-filter="all">all</button>
-      <button class="filter-btn" data-filter="hotel-booking">hotel-booking</button>
-      <button class="filter-btn" data-filter="catering-service">catering-service</button>
-      <button class="filter-btn" data-filter="gym-website">gym-website</button>
-      <button class="filter-btn" data-filter="hospital-website">hospital-website</button>
-      <button class="filter-btn" data-filter="travels-website">travels-website</button>
-    </div>
-
-    <div class="proj-grid reveal" id="projGrid">
-
-      <div class="win proj-card" data-cat="gym-website">
-        <div class="win-bar">
-          <span class="dot" style="background:var(--red-dot)"></span>
-          <span class="dot" style="background:var(--yellow-dot)"></span>
-          <span class="dot" style="background:var(--green-dot)"></span>
-          <span class="win-title">gym-website.app</span>
-        </div>
-        <div class="proj-thumb">
-    <img src="img/gym-img.png" alt="Project Screenshot">
-</div>
-        <div class="proj-body">
-          <div class="proj-title">gym-website</div>
-          <p class="proj-desc">A responsive gym website featuring membership plans, trainer profiles, fitness programs, and contact information with a modern user interface.</p>
-          <div class="chip-row" style="margin-bottom:14px;">
-            <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span>
-          </div>
-          <ul class="proj-feats">
-            <li>Responsive Design</li>
-            <li>Membership Plans</li>
-            <li>Trainer Profiles</li>
-          </ul>
-          <div class="proj-ctas">
-            <a href="https://maheshr1807.github.io/gym-site/" class="btn btn-primary">Live Demo</a>
-            <a href="#" class="btn btn-ghost">Source Code</a>
+      <div class="about-grid reveal">
+        <div class="about-text">
+          <p>I'm a <strong>Full Stack Web Developer</strong> based in Salem, Tamil Nadu, passionate about building modern web applications using the <strong>MERN stack</strong> (MongoDB, Express, React, Node.js).</p>
+          <p>As an aspiring developer and fresher, I design and build business websites, e-commerce platforms, admin dashboards, and custom web applications focused on clean code, solid architecture, and interfaces that work beautifully.</p>
+          <p>My goal is simple: help businesses and founders turn ideas into fast, reliable, production-ready web products, and keep learning and shipping along the way.</p>
+          <div class="about-ctas">
+            <a href="#contact" class="btn btn-coral">Let's Talk</a>
+            <a href="./assets/Mahesh_R_Resume.pdf" class="btn btn-outline" download>Resume</a>
           </div>
         </div>
-      </div>
-
-      <div class="win proj-card" data-cat="hotel-booking">
-        <div class="win-bar">
-          <span class="dot" style="background:var(--red-dot)"></span>
-          <span class="dot" style="background:var(--yellow-dot)"></span>
-          <span class="dot" style="background:var(--green-dot)"></span>
-          <span class="win-title">hotel-booking.app</span>
-        </div>
-        <div class="proj-thumb">
-    <img src="img/hotel-img.png" alt="Project Screenshot">
-</div>
-        <div class="proj-body">
-          <div class="proj-title">Hotel Booking Website</div>
-          <p class="proj-desc">A modern and responsive hotel website that showcases luxury rooms, amenities, and online booking with an elegant and user-friendly design.</p>
-          <div class="chip-row" style="margin-bottom:14px;">
-            <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span>
-          </div>
-          <ul class="proj-feats">
-            <li>Room Listings</li>
-            <li>Online Booking</li>
-            <li>Contact & Location</li>
-          </ul>
-          <div class="proj-ctas">
-            <a href="https://maheshr1807.github.io/hotel-booking/" class="btn btn-primary">Live Demo</a>
-            <a href="#" class="btn btn-ghost">Source Code</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="win proj-card" data-cat="catering-service">
-        <div class="win-bar">
-          <span class="dot" style="background:var(--red-dot)"></span>
-          <span class="dot" style="background:var(--yellow-dot)"></span>
-          <span class="dot" style="background:var(--green-dot)"></span>
-          <span class="win-title">catering-service.app</span>
-        </div>
-        <div class="proj-thumb">
-    <img src="img/catering-img.png" alt="Project Screenshot">
-</div>
-        <div class="proj-body">
-          <div class="proj-title">Catering Service Website</div>
-          <p class="proj-desc">A modern and responsive catering website showcasing delicious menus, event catering services, and easy booking for weddings, parties, and corporate events.</p>
-          <div class="chip-row" style="margin-bottom:14px;">
-            <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span>
-          </div>
-          <ul class="proj-feats">
-            <li>Delicious Menus</li>
-            <li>Event Catering Services</li>
-            <li>Easy Booking</li>
-          </ul>
-          <div class="proj-ctas">
-            <a href="https://maheshr1807.github.io/Karthika-catering-service/" class="btn btn-primary">Live Demo</a>
-            <a href="#" class="btn btn-ghost">Source Code</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="win proj-card" data-cat="hospital-website">
-        <div class="win-bar">
-          <span class="dot" style="background:var(--red-dot)"></span>
-          <span class="dot" style="background:var(--yellow-dot)"></span>
-          <span class="dot" style="background:var(--green-dot)"></span>
-          <span class="win-title">hospital-website.app</span>
-        </div>
-        <div class="proj-thumb">
-    <img src="img/hospital-img.png" alt="Project Screenshot">
-</div>
-        <div class="proj-body">
-          <div class="proj-title">Hospital & Clinic Website</div>
-          <p class="proj-desc">A modern and responsive hospital website that provides healthcare services, doctor profiles, appointment booking, and emergency contact information.</p>
-          <div class="chip-row" style="margin-bottom:14px;">
-            <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span>
-          </div>
-          <ul class="proj-feats">
-            <li>Healthcare Services</li>
-            <li>Doctor Profiles</li>
-            <li>Appointment Booking</li>
-          </ul>
-          <div class="proj-ctas">
-            <a href="https://maheshr1807.github.io/travels/" class="btn btn-primary">Live Demo</a>
-            <a href="#" class="btn btn-ghost">Source Code</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="win proj-card" data-cat="travels-website">
-        <div class="win-bar">
-          <span class="dot" style="background:var(--red-dot)"></span>
-          <span class="dot" style="background:var(--yellow-dot)"></span>
-          <span class="dot" style="background:var(--green-dot)"></span>
-          <span class="win-title">travels-website.app</span>
-        </div>
-        <div class="proj-thumb">
-    <img src="img/travels img.png" alt="Project Screenshot">
-</div>
-        <div class="proj-body">
-          <div class="proj-title">Travel & Tourism Website</div>
-          <p class="proj-desc">A modern and responsive travel website that showcases destinations, tours, and provides an easy booking experience for tourists.</p>
-          <div class="chip-row" style="margin-bottom:14px;">
-            <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span>
-          </div>
-          <ul class="proj-feats">
-            <li>Destinations Gallery</li>
-            <li>Tours</li>
-            <li>Easy Booking</li>
-          </ul>
-          <div class="proj-ctas">
-            <a href="https://maheshr1807.github.io/travels/" class="btn btn-primary">Live Demo</a>
-            <a href="#" class="btn btn-ghost">Source Code</a>
+        <div class="about-info-panel">
+          <div class="info-card">
+            <div class="info-row"><span class="info-label"><i class="fa-solid fa-graduation-cap"></i> Education</span><span class="info-value">B.E. Computer Science</span></div>
+            <div class="info-row"><span class="info-label"><i class="fa-solid fa-location-dot"></i> Location</span><span class="info-value">Salem, Tamil Nadu</span></div>
+            <div class="info-row"><span class="info-label"><i class="fa-solid fa-layer-group"></i> Stack</span><span class="info-value">MERN Stack</span></div>
+            <div class="info-row"><span class="info-label"><i class="fa-solid fa-bullseye"></i> Focus</span><span class="info-value">Full Stack Dev</span></div>
+            <div class="info-row"><span class="info-label"><i class="fa-solid fa-circle-check"></i> Status</span><span class="info-value info-available">Available for freelance</span></div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- SERVICES -->
-<section id="services">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-label">services</div>
-      <h2 class="sec-title">What I can build for you</h2>
-    </div>
-    <div class="services-grid reveal">
-      <div class="service-item"><span class="check">✔</span><div><h5>Business Website</h5><p>Fast, professional sites that represent your brand well.</p></div></div>
-      <div class="service-item"><span class="check">✔</span><div><h5>E-commerce Website</h5><p>Full online stores with cart, checkout, and payments.</p></div></div>
-      <div class="service-item"><span class="check">✔</span><div><h5>Portfolio Website</h5><p>Personal or agency portfolios that convert visitors to clients.</p></div></div>
-      <div class="service-item"><span class="check">✔</span><div><h5>Admin Dashboard</h5><p>Internal tools to manage data, users, and operations.</p></div></div>
-      <div class="service-item"><span class="check">✔</span><div><h5>Landing Page</h5><p>Focused, high-converting pages for campaigns and launches.</p></div></div>
-      <div class="service-item"><span class="check">✔</span><div><h5>API Development</h5><p>Clean REST APIs built for your web or mobile app.</p></div></div>
-      <div class="service-item"><span class="check">✔</span><div><h5>Bug Fixing & Maintenance</h5><p>Diagnosing and fixing issues in existing MERN applications.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- EXPERIENCE -->
-<section id="experience">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-label">experience</div>
-      <h2 class="sec-title">Where I've applied this</h2>
-    </div>
-    <div class="exp-item reveal">
-      <h4>Personal & Portfolio Projects</h4>
-      <p>Built multiple full-stack web applications using the MERN stack — including an e-commerce platform with authentication, payments, and an admin panel — and deployed them on cloud platforms like Vercel and Render.</p>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section id="testimonials">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-label">testimonials</div>
-      <h2 class="sec-title">What people say</h2>
-    </div>
-    <div class="test-grid reveal">
-      <div class="test-card">
-        <div class="test-comment">/* review */</div>
-        <p class="test-quote">"Mahesh built a clean and responsive website with excellent performance."</p>
-        <div class="test-name">— raja m</div>
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-label">skills</div>
+        <h2 class="sec-title">What I Work With</h2>
+        <p class="sec-subtitle">Technologies and tools in my developer toolkit</p>
       </div>
-      <div class="test-card">
-        <div class="test-comment">/* review */</div>
-        <p class="test-quote">"Communicated clearly through the whole project and delivered on time."</p>
-        <div class="test-name">— rajesh</div>
+      <div class="skills-grid reveal">
+        <div class="skill-card"><div class="skill-card-icon"><i class="fa-solid fa-desktop"></i></div><h3 class="skill-card-title">Frontend</h3><div class="chip-row"><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">React.js</span><span class="chip">Tailwind CSS</span><span class="chip">Bootstrap</span></div></div>
+        <div class="skill-card"><div class="skill-card-icon"><i class="fa-solid fa-server"></i></div><h3 class="skill-card-title">Backend</h3><div class="chip-row"><span class="chip">Node.js</span><span class="chip">Express.js</span><span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">REST APIs</span><span class="chip">JWT Auth</span></div></div>
+        <div class="skill-card"><div class="skill-card-icon"><i class="fa-solid fa-database"></i></div><h3 class="skill-card-title">Database</h3><div class="chip-row"><span class="chip">MongoDB</span><span class="chip">MySQL</span><span class="chip">Mongoose</span></div></div>
+        <div class="skill-card"><div class="skill-card-icon"><i class="fa-solid fa-wrench"></i></div><h3 class="skill-card-title">Tools</h3><div class="chip-row"><span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">VS Code</span><span class="chip">Postman</span><span class="chip">Vercel</span><span class="chip">Render</span><span class="chip">Netlify</span></div></div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- CONTACT -->
-<section id="contact">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-label">contact</div>
-      <h2 class="sec-title">Let's work together</h2>
-    </div>
-    <div class="contact-grid reveal">
-      <div class="contact-links">
-        <h1>Mahesh R</h1>
-        <a href="mailto:rm683443@gmail.com"><span class="k">email</span>rm683443@gmail.com</a>
-        <a href="tel:+91 9342763246"><span class="k">phone</span> +91 9342763246</a>
-        <a href="https://www.linkedin.com/in/mahesh-r-18062006r/" target="_blank"><span class="k">linkedin</span>linkedin.com/in/mahesh-r-18062006r/</a>
-        <a href="https://github.com/maheshr1807" target="_blank"><span class="k">github</span> github.com/maheshr1807</a>
-        <a href="https://wa.me/919342763246" target="_blank"><span class="k">whatsapp</span> chat on WhatsApp</a>
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-label">portfolio</div>
+        <h2 class="sec-title">Things I've Built</h2>
+        <p class="sec-subtitle">A selection of web applications and projects</p>
       </div>
-      <form onsubmit="event.preventDefault(); alert('Connect this form to a backend (e.g. Formspree, EmailJS) to receive messages.');">
-        <div>
-          <label for="name">name</label>
-          <input id="name" type="text" required placeholder="Your name" />
+      <div class="filter-row reveal">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="gym-website">Gym</button>
+        <button class="filter-btn" data-filter="hotel-booking">Hotel</button>
+        <button class="filter-btn" data-filter="catering-service">Catering</button>
+        <button class="filter-btn" data-filter="hospital-website">Hospital</button>
+        <button class="filter-btn" data-filter="travels-website">Travels</button>
+      </div>
+      <div class="proj-grid reveal" id="projGrid">
+        <div class="proj-card" data-cat="gym-website">
+          <div class="proj-thumb"><img src="img/gym-img.png" alt="Gym Website Screenshot"><div class="proj-overlay"><a href="https://maheshr1807.github.io/gym-site/" target="_blank" rel="noopener" class="overlay-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a></div></div>
+          <div class="proj-body"><div class="proj-category-tag">Website</div><h3 class="proj-title">Gym Website</h3><p class="proj-desc">A responsive gym website featuring membership plans, trainer profiles, fitness programs, and contact information with a modern user interface.</p><div class="chip-row proj-techs"><span class="chip chip-sm">HTML</span><span class="chip chip-sm">CSS</span><span class="chip chip-sm">JavaScript</span></div><div class="proj-ctas"><a href="https://maheshr1807.github.io/gym-site/" class="btn btn-coral btn-sm" target="_blank" rel="noopener"><i class="fa-solid fa-eye"></i> Live Demo</a><a href="#" class="btn btn-outline btn-sm"><i class="fa-brands fa-github"></i> Source</a></div></div>
         </div>
-        <div>
-          <label for="email">email</label>
-          <input id="email" type="email" required placeholder="you@example.com" />
+        <div class="proj-card" data-cat="hotel-booking">
+          <div class="proj-thumb"><img src="img/hotel-img.png" alt="Hotel Website Screenshot"><div class="proj-overlay"><a href="https://maheshr1807.github.io/hotel-booking/" target="_blank" rel="noopener" class="overlay-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a></div></div>
+          <div class="proj-body"><div class="proj-category-tag">Website</div><h3 class="proj-title">Hotel Booking Website</h3><p class="proj-desc">A modern and responsive hotel website that showcases luxury rooms, amenities, and online booking with an elegant and user-friendly design.</p><div class="chip-row proj-techs"><span class="chip chip-sm">HTML</span><span class="chip chip-sm">CSS</span><span class="chip chip-sm">JavaScript</span></div><div class="proj-ctas"><a href="https://maheshr1807.github.io/hotel-booking/" class="btn btn-coral btn-sm" target="_blank" rel="noopener"><i class="fa-solid fa-eye"></i> Live Demo</a><a href="#" class="btn btn-outline btn-sm"><i class="fa-brands fa-github"></i> Source</a></div></div>
         </div>
-        <div>
-          <label for="message">message</label>
-          <textarea id="message" required placeholder="Tell me about your project..."></textarea>
+        <div class="proj-card" data-cat="catering-service">
+          <div class="proj-thumb"><img src="img/catering-img.png" alt="Catering Website Screenshot"><div class="proj-overlay"><a href="https://maheshr1807.github.io/Karthika-catering-service/" target="_blank" rel="noopener" class="overlay-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a></div></div>
+          <div class="proj-body"><div class="proj-category-tag">Website</div><h3 class="proj-title">Catering Service Website</h3><p class="proj-desc">A modern and responsive catering website showcasing delicious menus, event catering services, and easy booking for weddings, parties, and corporate events.</p><div class="chip-row proj-techs"><span class="chip chip-sm">HTML</span><span class="chip chip-sm">CSS</span><span class="chip chip-sm">JavaScript</span></div><div class="proj-ctas"><a href="https://maheshr1807.github.io/Karthika-catering-service/" class="btn btn-coral btn-sm" target="_blank" rel="noopener"><i class="fa-solid fa-eye"></i> Live Demo</a><a href="#" class="btn btn-outline btn-sm"><i class="fa-brands fa-github"></i> Source</a></div></div>
         </div>
-        <button type="submit" class="btn btn-primary" style="align-self:flex-start;">$ send-message</button>
-      </form>
+        <div class="proj-card" data-cat="hospital-website">
+          <div class="proj-thumb"><img src="img/hospital-img.png" alt="Hospital Website Screenshot"><div class="proj-overlay"><a href="https://maheshr1807.github.io/travels/" target="_blank" rel="noopener" class="overlay-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a></div></div>
+          <div class="proj-body"><div class="proj-category-tag">Website</div><h3 class="proj-title">Hospital &amp; Clinic Website</h3><p class="proj-desc">A modern and responsive hospital website that provides healthcare services, doctor profiles, appointment booking, and emergency contact information.</p><div class="chip-row proj-techs"><span class="chip chip-sm">HTML</span><span class="chip chip-sm">CSS</span><span class="chip chip-sm">JavaScript</span></div><div class="proj-ctas"><a href="https://maheshr1807.github.io/travels/" class="btn btn-coral btn-sm" target="_blank" rel="noopener"><i class="fa-solid fa-eye"></i> Live Demo</a><a href="#" class="btn btn-outline btn-sm"><i class="fa-brands fa-github"></i> Source</a></div></div>
+        </div>
+        <div class="proj-card" data-cat="travels-website">
+          <div class="proj-thumb"><img src="img/travels img.png" alt="Travel Website Screenshot"><div class="proj-overlay"><a href="https://maheshr1807.github.io/travels/" target="_blank" rel="noopener" class="overlay-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a></div></div>
+          <div class="proj-body"><div class="proj-category-tag">Website</div><h3 class="proj-title">Travel &amp; Tourism Website</h3><p class="proj-desc">A modern and responsive travel website that showcases destinations, tours, and provides an easy booking experience for tourists.</p><div class="chip-row proj-techs"><span class="chip chip-sm">HTML</span><span class="chip chip-sm">CSS</span><span class="chip chip-sm">JavaScript</span></div><div class="proj-ctas"><a href="https://maheshr1807.github.io/travels/" class="btn btn-coral btn-sm" target="_blank" rel="noopener"><i class="fa-solid fa-eye"></i> Live Demo</a><a href="#" class="btn btn-outline btn-sm"><i class="fa-brands fa-github"></i> Source</a></div></div>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer>
-  © <span id="year"></span> Mahesh R — built with React, Node.js, Express & MongoDB in mind.
-  <a href="admin.html" style="margin-left:18px;opacity:0.25;font-size:11px;color:inherit;text-decoration:none;font-family:'JetBrains Mono',monospace;" title="Admin Panel">⚙ admin</a>
-</footer>
+  <!-- FREELANCING -->
+  <section id="freelancing">
+    <div class="freelancing-bg-accent"></div>
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-label">freelancing</div>
+        <h2 class="sec-title">Freelancing Projects</h2>
+        <p class="sec-subtitle">Helping businesses build their online presence through modern websites and digital solutions.</p>
+      </div>
+      <div class="freelancing-services reveal">
+        <div class="freelancing-service-card"><div class="fservice-icon"><i class="fa-solid fa-globe"></i></div><h4>Business Website</h4><p>Fast, professional sites that represent your brand well and attract customers.</p></div>
+        <div class="freelancing-service-card"><div class="fservice-icon"><i class="fa-solid fa-shop"></i></div><h4>E-commerce Store</h4><p>Full online stores with cart, checkout, and secure payment integration.</p></div>
+        <div class="freelancing-service-card"><div class="fservice-icon"><i class="fa-solid fa-rocket"></i></div><h4>Landing Pages</h4><p>Focused, high-converting pages for product launches and campaigns.</p></div>
+        <div class="freelancing-service-card"><div class="fservice-icon"><i class="fa-solid fa-chart-bar"></i></div><h4>Admin Dashboard</h4><p>Internal tools to manage data, users, and business operations efficiently.</p></div>
+      </div>
+      <div class="freelancing-grid reveal" id="freelancingGrid">
+        <div class="freelancing-card">
+          <div class="freelancing-thumb"><img src="img/gym-img.png" alt="Gym Website Freelance Project"><div class="freelancing-category-badge">Website Development</div></div>
+          <div class="freelancing-card-body"><h3 class="freelancing-title">Gym &amp; Fitness Website</h3><p class="freelancing-client"><i class="fa-solid fa-building"></i> Fitness Business</p><p class="freelancing-desc">Built a fully responsive gym website featuring membership plans, trainer profiles, class schedules, and a contact section with a clean, energetic design.</p><div class="chip-row" style="margin:12px 0"><span class="chip chip-sm">HTML</span><span class="chip chip-sm">CSS</span><span class="chip chip-sm">JavaScript</span></div><div class="freelancing-card-ctas"><a href="https://maheshr1807.github.io/gym-site/" target="_blank" rel="noopener" class="btn btn-coral btn-sm"><i class="fa-solid fa-arrow-up-right-from-square"></i> View Live</a></div></div>
+        </div>
+        <div class="freelancing-card">
+          <div class="freelancing-thumb"><img src="img/catering-img.png" alt="Catering Service Website"><div class="freelancing-category-badge">Business Website</div></div>
+          <div class="freelancing-card-body"><h3 class="freelancing-title">Karthika Catering Service</h3><p class="freelancing-client"><i class="fa-solid fa-building"></i> Karthika Catering</p><p class="freelancing-desc">Developed a professional catering website showcasing menus, event catering services, and easy booking for weddings, parties, and corporate events.</p><div class="chip-row" style="margin:12px 0"><span class="chip chip-sm">HTML</span><span class="chip chip-sm">CSS</span><span class="chip chip-sm">JavaScript</span></div><div class="freelancing-card-ctas"><a href="https://maheshr1807.github.io/Karthika-catering-service/" target="_blank" rel="noopener" class="btn btn-coral btn-sm"><i class="fa-solid fa-arrow-up-right-from-square"></i> View Live</a></div></div>
+        </div>
+        <div class="freelancing-card">
+          <div class="freelancing-thumb"><img src="img/hotel-img.png" alt="Hotel Website"><div class="freelancing-category-badge">Website Development</div></div>
+          <div class="freelancing-card-body"><h3 class="freelancing-title">Hotel Booking Website</h3><p class="freelancing-client"><i class="fa-solid fa-building"></i> Hospitality Business</p><p class="freelancing-desc">A premium hotel website showcasing luxury rooms, amenities, gallery, and online booking designed to attract and convert visitors into guests.</p><div class="chip-row" style="margin:12px 0"><span class="chip chip-sm">HTML</span><span class="chip chip-sm">CSS</span><span class="chip chip-sm">JavaScript</span></div><div class="freelancing-card-ctas"><a href="https://maheshr1807.github.io/hotel-booking/" target="_blank" rel="noopener" class="btn btn-coral btn-sm"><i class="fa-solid fa-arrow-up-right-from-square"></i> View Live</a></div></div>
+        </div>
+        <div class="freelancing-card">
+          <div class="freelancing-thumb"><img src="img/tuition-img.png" alt="Tuition Center" onerror="this.parentElement.style.background='#1a2535'"><div class="freelancing-category-badge">Education Website</div></div>
+          <div class="freelancing-card-body"><h3 class="freelancing-title">Tuition Center Website</h3><p class="freelancing-client"><i class="fa-solid fa-building"></i> Education Provider</p><p class="freelancing-desc">A clean website for a tutoring center displaying course offerings, batch schedules, teacher profiles, and enrollment information.</p><div class="chip-row" style="margin:12px 0"><span class="chip chip-sm">HTML</span><span class="chip chip-sm">CSS</span><span class="chip chip-sm">JavaScript</span></div><div class="freelancing-card-ctas"><a href="#" class="btn btn-outline btn-sm"><i class="fa-solid fa-link"></i> Link Pending</a></div></div>
+        </div>
+        <div class="freelancing-card">
+          <div class="freelancing-thumb"><img src="img/travels img.png" alt="Travels Website"><div class="freelancing-category-badge">Travel &amp; Tourism</div></div>
+          <div class="freelancing-card-body"><h3 class="freelancing-title">Travel &amp; Tourism Website</h3><p class="freelancing-client"><i class="fa-solid fa-building"></i> Travel Agency</p><p class="freelancing-desc">A vibrant travel website showcasing destinations, tour packages, and easy booking built to attract travelers and drive inquiries.</p><div class="chip-row" style="margin:12px 0"><span class="chip chip-sm">HTML</span><span class="chip chip-sm">CSS</span><span class="chip chip-sm">JavaScript</span></div><div class="freelancing-card-ctas"><a href="https://maheshr1807.github.io/travels/" target="_blank" rel="noopener" class="btn btn-coral btn-sm"><i class="fa-solid fa-arrow-up-right-from-square"></i> View Live</a></div></div>
+        </div>
+        <div class="freelancing-card freelancing-card-placeholder">
+          <div class="freelancing-placeholder-inner">
+            <div class="placeholder-icon"><i class="fa-solid fa-plus"></i></div>
+            <h3>Your Project Here</h3>
+            <p>Have a project in mind? Let's build something great together.</p>
+            <a href="#contact" class="btn btn-coral btn-sm">Discuss Your Project</a>
+          </div>
+        </div>
+      </div>
+      <div class="freelancing-cta reveal">
+        <p>Have a project in mind? I'd love to hear about it.</p>
+        <a href="#contact" class="btn btn-coral"><i class="fa-solid fa-comments"></i> Discuss Your Project</a>
+      </div>
+    </div>
+  </section>
 
-<div class="statusbar">
-  <div class="seg">
-    <span>⌥ main</span>
-    <span class="hide-mobile">MERN Stack</span>
-    <span class="hide-mobile">Salem, TN</span>
-  </div>
-  <div class="seg">
-    <span class="dotpulse"></span>
-    <span>Available for freelance work</span>
-  </div>
-</div>
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-label">contact</div>
+        <h2 class="sec-title">Let's Work Together</h2>
+        <p class="sec-subtitle">Open to freelance opportunities, developer roles, and interesting collaborations.</p>
+      </div>
+      <div class="contact-grid reveal">
+        <div class="contact-info">
+          <p class="contact-intro">Whether you have a project to build, a position to fill, or just want to say hello — my inbox is always open.</p>
+          <div class="contact-links">
+            <a href="mailto:rm683443@gmail.com" class="contact-link" id="emailLink"><div class="contact-link-icon"><i class="fa-solid fa-envelope"></i></div><div><div class="contact-link-label">Email</div><div class="contact-link-value">rm683443@gmail.com</div></div></a>
+            <a href="tel:+919342763246" class="contact-link" id="phoneLink"><div class="contact-link-icon"><i class="fa-solid fa-phone"></i></div><div><div class="contact-link-label">Phone</div><div class="contact-link-value">+91 9342763246</div></div></a>
+            <a href="https://www.linkedin.com/in/mahesh-r-18062006r/" target="_blank" rel="noopener" class="contact-link" id="linkedinLink"><div class="contact-link-icon"><i class="fa-brands fa-linkedin-in"></i></div><div><div class="contact-link-label">LinkedIn</div><div class="contact-link-value">linkedin.com/in/mahesh-r-18062006r</div></div></a>
+            <a href="https://github.com/maheshr1807" target="_blank" rel="noopener" class="contact-link" id="githubLink"><div class="contact-link-icon"><i class="fa-brands fa-github"></i></div><div><div class="contact-link-label">GitHub</div><div class="contact-link-value">github.com/maheshr1807</div></div></a>
+            <a href="https://wa.me/919342763246" target="_blank" rel="noopener" class="contact-link" id="whatsappLink"><div class="contact-link-icon whatsapp-icon"><i class="fa-brands fa-whatsapp"></i></div><div><div class="contact-link-label">WhatsApp</div><div class="contact-link-value">Chat on WhatsApp</div></div></a>
+          </div>
+        </div>
+        <form class="contact-form" id="contactForm" onsubmit="handleFormSubmit(event)">
+          <div class="form-group"><label for="contactName">Your Name</label><input id="contactName" type="text" required placeholder="John Doe" autocomplete="name" /></div>
+          <div class="form-group"><label for="contactEmail">Email Address</label><input id="contactEmail" type="email" required placeholder="you@example.com" autocomplete="email" /></div>
+          <div class="form-group"><label for="contactSubject">Subject</label><input id="contactSubject" type="text" placeholder="Project Inquiry" /></div>
+          <div class="form-group"><label for="contactMessage">Message</label><textarea id="contactMessage" required placeholder="Tell me about your project or opportunity..."></textarea></div>
+          <button type="submit" class="btn btn-coral form-submit-btn" id="formSubmitBtn"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
+          <p class="form-note" id="formNote"></p>
+        </form>
+      </div>
+    </div>
+  </section>
 
-<script src="data.js"></script>
-<script src="script.js"></script>
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap footer-inner">
+      <div class="footer-brand"><span class="brand-accent">&lt;</span>Mahesh<span class="brand-accent">/&gt;</span></div>
+      <p class="footer-tagline">Full Stack Developer &middot; MERN Stack &middot; Salem, TN</p>
+      <div class="footer-socials">
+        <a href="https://github.com/maheshr1807" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/mahesh-r-18062006r/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="mailto:rm683443@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+        <a href="https://wa.me/919342763246" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+      </div>
+      <p class="footer-copy">&copy; <span id="year"></span> Mahesh R. Built with passion using HTML, CSS &amp; JavaScript.</p>
+      <a href="admin.html" class="footer-admin-link" title="Admin Panel">admin</a>
+    </div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

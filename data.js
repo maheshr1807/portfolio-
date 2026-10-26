@@ -6,42 +6,49 @@
 
 const DEFAULT_DATA = {
   hero: {
-    name: 'Mahesh R',
-    roles: ['"Full Stack Web Developer"', '"MERN Stack Developer"', '"Freelance Web Developer"'],
-    description: 'I build fast, responsive, and scalable websites using React, Node.js, Express, and MongoDB — from e-commerce platforms to admin dashboards.',
-    ctaPrimary:   { label: '$ view-projects',   href: '#projects' },
-    ctaSecondary: { label: '$ hire-me',         href: '#contact'  },
-    ctaGhost:     { label: '↓ download-resume', href: '#'         },
-    stackLayers: [
-      { tech: 'React + Tailwind CSS',          label: 'FRONTEND'    },
-      { tech: 'Node.js + Express',             label: 'BACKEND'     },
-      { tech: 'MongoDB + JWT Auth',            label: 'DATA & AUTH' },
-      { tech: 'Vercel · Render · Netlify · Github', label: 'DEPLOY' }
-    ]
+    greeting: "Hello, I'm",
+    name: 'Mahesh',
+    photo: 'public/images/profile/mahesh-1.jpeg',
+    slideshow: [
+      'public/images/profile/mahesh-1.jpeg',
+      'public/images/profile/mahesh-2.jpeg',
+      'public/images/profile/mahesh-3.jpeg',
+      'public/images/profile/mahesh-4.jpeg'
+    ],
+    roles: [
+      'Full Stack Developer',
+      'MERN Stack Developer',
+      'Frontend & React Specialist',
+      'Freelance Web Developer'
+    ],
+    description: 'I build responsive web applications and practical digital solutions that help businesses grow online.',
+    ctaPrimary:   { label: 'Hire Me',       href: '#contact' },
+    ctaSecondary: { label: 'View Resume',   href: './assets/Mahesh_R_Resume.pdf' }
   },
   about: {
     paragraphs: [
-      "I'm a <b>Full Stack Web Developer</b> based in Salem, Tamil Nadu, specializing in modern web applications built on the <b>MERN stack</b> (MongoDB, Express, React, Node.js).",
-      "I design and build e-commerce websites, admin dashboards, business websites, and custom web applications — focused on clean code, solid architecture, and interfaces that actually work well for the people using them.",
+      "I'm a <strong>Full Stack Web Developer</strong> based in Salem, Tamil Nadu, passionate about building modern web applications using the <strong>MERN stack</strong> (MongoDB, Express, React, Node.js).",
+      "As an aspiring developer and fresher, I design and build business websites, e-commerce platforms, admin dashboards, and custom web applications focused on clean code, solid architecture, and interfaces that work beautifully.",
       "My goal is simple: help businesses and founders turn ideas into fast, reliable, production-ready web products, and keep learning and shipping along the way."
     ],
     stats: [
-      { label: 'education', value: 'B.E. Computer Science' },
-      { label: 'location',  value: 'Salem, IN'             },
-      { label: 'stack',     value: 'MERN'                  },
-      { label: 'focus',     value: 'Full Stack Dev'         },
-      { label: 'status',    value: 'Available for freelance'}
+      { label: 'Education', value: 'B.E. Computer Science' },
+      { label: 'Location',  value: 'Salem, Tamil Nadu'     },
+      { label: 'Stack',     value: 'MERN Stack'            },
+      { label: 'Focus',     value: 'Full Stack Dev'        },
+      { label: 'Status',    value: 'Available for freelance'}
     ]
   },
   skills: [
-    { category: 'Frontend', chips: ['HTML', 'CSS', 'JavaScript', 'React', 'Tailwind CSS', 'Bootstrap'] },
-    { category: 'Backend',  chips: ['Node.js', 'Express.js', 'MongoDB', 'REST APIs', 'JWT Auth']       },
-    { category: 'Tools',    chips: ['Git', 'GitHub', 'Postman', 'VS Code', 'Vercel', 'Render', 'Netlify'] }
+    { category: 'Frontend', chips: ['HTML', 'CSS', 'JavaScript', 'React.js', 'Tailwind CSS', 'Bootstrap'] },
+    { category: 'Backend',  chips: ['Node.js', 'Express.js', 'Python', 'FastAPI', 'REST APIs', 'JWT Auth'] },
+    { category: 'Database', chips: ['MongoDB', 'MySQL', 'Mongoose'] },
+    { category: 'Tools',    chips: ['Git', 'GitHub', 'VS Code', 'Postman', 'Vercel', 'Render', 'Netlify'] }
   ],
   projects: [
     {
       id: 'p1',
-      title: 'gym-website',
+      title: 'Gym Website',
       category: 'gym-website',
       description: 'A responsive gym website featuring membership plans, trainer profiles, fitness programs, and contact information with a modern user interface.',
       image: 'img/gym-img.png',
@@ -93,31 +100,83 @@ const DEFAULT_DATA = {
       features: ['Destinations Gallery', 'Tours', 'Easy Booking'],
       liveLink: 'https://maheshr1807.github.io/travels/',
       sourceLink: '#'
+    },
+    {
+      id: 'p6',
+      title: 'Tuition Center Website',
+      category: 'tuition-booking',
+      description: 'A clean website for a tutoring center displaying course offerings, batch schedules, teacher profiles, and enrollment information.',
+      image: 'img/tuition-img.png',
+      techs: ['HTML', 'CSS', 'JavaScript'],
+      features: ['WhatsApp Enroll', 'Course Showcase'],
+      liveLink: 'https://maheshr1807.github.io/tuition-website/',
+      sourceLink: '#'
+    }
+  ],
+  freelancingProjects: [
+    {
+      id: 'fp1',
+      title: 'Gym & Fitness Website',
+      client: 'Fitness Business',
+      category: 'Website Development',
+      description: 'Built a fully responsive gym website featuring membership plans, trainer profiles, class schedules, and a contact section with a clean, energetic design.',
+      image: 'img/gym-img.png',
+      techs: ['HTML', 'CSS', 'JavaScript'],
+      liveLink: 'https://maheshr1807.github.io/gym-site/'
+    },
+    {
+      id: 'fp2',
+      title: 'Karthika Catering Service',
+      client: 'Karthika Catering',
+      category: 'Business Website',
+      description: 'Developed a professional catering website showcasing menus, event catering services, and easy booking for weddings, parties, and corporate events.',
+      image: 'img/catering-img.png',
+      techs: ['HTML', 'CSS', 'JavaScript'],
+      liveLink: 'https://maheshr1807.github.io/Karthika-catering-service/'
+    },
+    {
+      id: 'fp3',
+      title: 'Hotel Booking Website',
+      client: 'Hospitality Business',
+      category: 'Website Development',
+      description: 'A premium hotel website showcasing luxury rooms, amenities, gallery, and online booking designed to attract and convert visitors into guests.',
+      image: 'img/hotel-img.png',
+      techs: ['HTML', 'CSS', 'JavaScript'],
+      liveLink: 'https://maheshr1807.github.io/hotel-booking/'
+    },
+    {
+      id: 'fp4',
+      title: 'Tuition Center Website',
+      client: 'Education Provider',
+      category: 'Education Website',
+      description: 'A clean website for a tutoring center displaying course offerings, batch schedules, teacher profiles, and enrollment information.',
+      image: 'img/tuition-img.png',
+      techs: ['HTML', 'CSS', 'JavaScript'],
+      liveLink: 'https://maheshr1807.github.io/tuition-website/'
+    },
+    {
+      id: 'fp5',
+      title: 'Travel & Tourism Website',
+      client: 'Travel Agency',
+      category: 'Travel & Tourism',
+      description: 'A vibrant travel website showcasing destinations, tour packages, and easy booking built to attract travelers and drive inquiries.',
+      image: 'img/travels img.png',
+      techs: ['HTML', 'CSS', 'JavaScript'],
+      liveLink: 'https://maheshr1807.github.io/travels/'
     }
   ],
   services: [
-    { title: 'Business Website',         desc: 'Fast, professional sites that represent your brand well.'           },
-    { title: 'E-commerce Website',       desc: 'Full online stores with cart, checkout, and payments.'              },
-    { title: 'Portfolio Website',        desc: 'Personal or agency portfolios that convert visitors to clients.'     },
-    { title: 'Admin Dashboard',          desc: 'Internal tools to manage data, users, and operations.'              },
-    { title: 'Landing Page',             desc: 'Focused, high-converting pages for campaigns and launches.'         },
-    { title: 'API Development',          desc: 'Clean REST APIs built for your web or mobile app.'                  },
-    { title: 'Bug Fixing & Maintenance', desc: 'Diagnosing and fixing issues in existing MERN applications.'        }
-  ],
-  experience: {
-    title: 'Personal & Portfolio Projects',
-    body: 'Built multiple full-stack web applications using the MERN stack — including an e-commerce platform with authentication, payments, and an admin panel — and deployed them on cloud platforms like Vercel and Render.'
-  },
-  testimonials: [
-    { quote: '"Mahesh built a clean and responsive website with excellent performance."', author: '— raja m' },
-    { quote: '"Communicated clearly through the whole project and delivered on time."',  author: '— rajesh' }
+    { title: 'Business Website', desc: 'Fast, professional sites that represent your brand well and attract customers.' },
+    { title: 'E-commerce Store',  desc: 'Full online stores with cart, checkout, and secure payment integration.' },
+    { title: 'Landing Pages',    desc: 'Focused, high-converting pages for product launches and campaigns.' },
+    { title: 'Admin Dashboard',  desc: 'Internal tools to manage data, users, and business operations efficiently.' }
   ],
   contact: {
     name:          'Mahesh R',
     email:         'rm683443@gmail.com',
     phone:         '+91 9342763246',
     linkedin:      'https://www.linkedin.com/in/mahesh-r-18062006r/',
-    linkedinLabel: 'linkedin.com/in/mahesh-r-18062006r/',
+    linkedinLabel: 'linkedin.com/in/mahesh-r-18062006r',
     github:        'https://github.com/maheshr1807',
     githubLabel:   'github.com/maheshr1807',
     whatsapp:      'https://wa.me/919342763246'
@@ -133,152 +192,186 @@ window.DEFAULT_DATA = DEFAULT_DATA;
 
 function renderHero(data) {
   const d = data.hero;
+  if (!d) return;
+
+  const greetingEl = document.querySelector('.hero-greeting');
+  if (greetingEl && d.greeting) greetingEl.textContent = d.greeting;
+
   const nameEl = document.querySelector('.hero-name');
-  if (!nameEl) return;
+  if (nameEl && d.name) {
+    nameEl.textContent = d.name.replace(/\s+R$/i, '');
+  }
 
-  nameEl.textContent = d.name;
   const brandEl = document.querySelector('.brand');
-  if (brandEl) brandEl.innerHTML = `<span class="brk">&lt;</span>${d.name}<span class="brk">/&gt;</span>`;
-
-  const codeNameEl = document.querySelector('.hero-code .code-line:nth-child(2)');
-  if (codeNameEl) codeNameEl.innerHTML = `&nbsp;&nbsp;name: <span class="code-str">"${d.name}"</span>,`;
+  if (brandEl && d.name) brandEl.innerHTML = `<span class="brand-accent">&lt;</span>${d.name}<span class="brand-accent">/&gt;</span>`;
 
   const descEl = document.querySelector('.hero-desc');
-  if (descEl) descEl.textContent = d.description;
+  if (descEl && d.description) descEl.textContent = d.description;
 
-  const ctas = document.querySelectorAll('.hero-ctas a');
-  if (ctas[0]) { ctas[0].textContent = d.ctaPrimary.label;   ctas[0].href = d.ctaPrimary.href;   }
-  if (ctas[1]) { ctas[1].textContent = d.ctaSecondary.label; ctas[1].href = d.ctaSecondary.href; }
-  if (ctas[2]) { ctas[2].textContent = d.ctaGhost.label;     ctas[2].href = d.ctaGhost.href;     }
+  const hireBtn = document.getElementById('heroHireBtn');
+  if (hireBtn && d.ctaPrimary) {
+    if (d.ctaPrimary.label && !d.ctaPrimary.label.startsWith('$')) {
+      hireBtn.textContent = d.ctaPrimary.label;
+    } else {
+      hireBtn.textContent = 'Hire Me';
+    }
+    if (d.ctaPrimary.href) hireBtn.href = d.ctaPrimary.href;
+  }
 
-  const layers = document.querySelectorAll('.stack .layer');
-  d.stackLayers.forEach((l, i) => {
-    if (layers[i]) layers[i].innerHTML = `<b>${l.tech}</b><span>${l.label}</span>`;
-  });
+  const resumeBtn = document.getElementById('heroResumeBtn');
+  if (resumeBtn && d.ctaSecondary) {
+    if (d.ctaSecondary.label && !d.ctaSecondary.label.startsWith('$')) {
+      resumeBtn.textContent = d.ctaSecondary.label;
+    } else {
+      resumeBtn.textContent = 'View Resume';
+    }
+    if (d.ctaSecondary.href) resumeBtn.href = d.ctaSecondary.href;
+  }
 
-  window._portfolioRoles = d.roles;
+  const photoEl = document.getElementById('profilePhoto');
+  if (photoEl && d.photo) {
+    photoEl.src = d.photo;
+  }
+
+  if (d.slideshow && Array.isArray(d.slideshow)) {
+    const slideImgs = document.querySelectorAll('#heroSlideshow .profile-slide-img');
+    d.slideshow.forEach((url, i) => {
+      if (slideImgs[i] && url) slideImgs[i].src = url;
+    });
+  }
+
+  if (d.roles && Array.isArray(d.roles)) {
+    window._portfolioRoles = d.roles.map(r => r.replace(/^"|"$/g, ''));
+  }
 }
 
 function renderAbout(data) {
   const d = data.about;
-  const textEl = document.querySelector('.about-text');
-  if (!textEl) return;
-  textEl.innerHTML = d.paragraphs.map(p => `<p>${p}</p>`).join('');
-  const statBox = document.querySelector('.stat-box');
-  if (statBox) statBox.innerHTML = d.stats.map(s =>
-    `<div class="stat-row"><span>${s.label}</span><span>${s.value}</span></div>`
-  ).join('');
-}
+  if (!d) return;
 
-function renderSkills(data) {
-  const container = document.querySelector('.skill-cols');
-  if (!container) return;
-  container.innerHTML = data.skills.map(group => `
-    <div class="skill-card">
-      <h4>${group.category}</h4>
-      <div class="chip-row">${group.chips.map(c => `<span class="chip">${c}</span>`).join('')}</div>
-    </div>
-  `).join('');
+  const textEl = document.querySelector('.about-text');
+  if (textEl && d.paragraphs) {
+    const ctas = textEl.querySelector('.about-ctas');
+    textEl.innerHTML = d.paragraphs.map(p => `<p>${p}</p>`).join('');
+    if (ctas) textEl.appendChild(ctas);
+  }
 }
 
 function renderProjects(data) {
   const grid = document.getElementById('projGrid');
-  if (!grid) return;
-  const filterRow = document.querySelector('.filter-row');
-  if (filterRow) {
-    const cats = [...new Set(data.projects.map(p => p.category))];
-    filterRow.innerHTML = `<button class="filter-btn active" data-filter="all">all</button>` +
-      cats.map(c => `<button class="filter-btn" data-filter="${c}">${c}</button>`).join('');
-    filterRow.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        filterRow.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const f = btn.dataset.filter;
-        document.querySelectorAll('#projGrid .proj-card').forEach(card => {
-          card.style.display = (f === 'all' || card.dataset.cat === f) ? '' : 'none';
-        });
-      });
-    });
-  }
+  if (!grid || !data.projects || data.projects.length === 0) return;
+
   grid.innerHTML = data.projects.map(p => `
-    <div class="win proj-card" data-cat="${p.category}" data-id="${p.id}">
-      <div class="win-bar">
-        <span class="dot" style="background:var(--red-dot)"></span>
-        <span class="dot" style="background:var(--yellow-dot)"></span>
-        <span class="dot" style="background:var(--green-dot)"></span>
-        <span class="win-title">${p.category}.app</span>
-      </div>
+    <div class="proj-card" data-cat="${p.category}" data-id="${p.id || ''}">
       <div class="proj-thumb">
-        <img src="${p.image}" alt="${p.title} Screenshot" onerror="this.style.display='none'">
+        <img src="${p.image}" alt="${p.title} Screenshot" onerror="this.parentElement.style.background='#162734'">
+        <div class="proj-overlay">
+          <a href="${p.liveLink}" target="_blank" rel="noopener" class="overlay-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+        </div>
       </div>
       <div class="proj-body">
-        <div class="proj-title">${p.title}</div>
+        <div class="proj-category-tag">${(p.category || 'Website').replace(/-/g, ' ')}</div>
+        <h3 class="proj-title">${p.title}</h3>
         <p class="proj-desc">${p.description}</p>
-        <div class="chip-row" style="margin-bottom:14px;">
-          ${p.techs.map(t => `<span class="chip">${t}</span>`).join('')}
+        <div class="chip-row proj-techs">
+          ${(p.techs || []).map(t => `<span class="chip chip-sm">${t}</span>`).join('')}
         </div>
-        <ul class="proj-feats">${p.features.map(f => `<li>${f}</li>`).join('')}</ul>
         <div class="proj-ctas">
-          <a href="${p.liveLink}" class="btn btn-primary" target="_blank">Live Demo</a>
-          <a href="${p.sourceLink}" class="btn btn-ghost" target="_blank">Source Code</a>
+          <a href="${p.liveLink}" class="btn btn-coral btn-sm" target="_blank" rel="noopener"><i class="fa-solid fa-eye"></i> Live Demo</a>
+          ${p.sourceLink && p.sourceLink !== '#' ? `<a href="${p.sourceLink}" class="btn btn-outline btn-sm" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Source</a>` : `<a href="#" class="btn btn-outline btn-sm"><i class="fa-brands fa-github"></i> Source</a>`}
         </div>
       </div>
     </div>
   `).join('');
 }
 
-function renderServices(data) {
-  const grid = document.querySelector('.services-grid');
-  if (!grid) return;
-  grid.innerHTML = data.services.map(s => `
-    <div class="service-item">
-      <span class="check">✔</span>
-      <div><h5>${s.title}</h5><p>${s.desc}</p></div>
+function renderFreelancing(data) {
+  const grid = document.getElementById('freelancingGrid');
+  if (!grid || !data.freelancingProjects || data.freelancingProjects.length === 0) return;
+
+  const cardsHtml = data.freelancingProjects.map(p => `
+    <div class="freelancing-card">
+      <div class="freelancing-thumb">
+        <img src="${p.image}" alt="${p.title}" onerror="this.parentElement.style.background='#162734'">
+        <div class="freelancing-category-badge">${p.category || 'Website Development'}</div>
+      </div>
+      <div class="freelancing-card-body">
+        <h3 class="freelancing-title">${p.title}</h3>
+        <p class="freelancing-client"><i class="fa-solid fa-building"></i> ${p.client || 'Client Project'}</p>
+        <p class="freelancing-desc">${p.description}</p>
+        <div class="chip-row" style="margin:12px 0">
+          ${(p.techs || []).map(t => `<span class="chip chip-sm">${t}</span>`).join('')}
+        </div>
+        <div class="freelancing-card-ctas">
+          ${p.liveLink && p.liveLink !== '#' ? `
+            <a href="${p.liveLink}" target="_blank" rel="noopener" class="btn btn-coral btn-sm">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> View Live
+            </a>` : `
+            <a href="#" class="btn btn-outline btn-sm"><i class="fa-solid fa-link"></i> Link Pending</a>
+          `}
+        </div>
+      </div>
     </div>
   `).join('');
-}
 
-function renderExperience(data) {
-  const item = document.querySelector('.exp-item');
-  if (!item) return;
-  item.innerHTML = `<h4>${data.experience.title}</h4><p>${data.experience.body}</p>`;
-}
-
-function renderTestimonials(data) {
-  const grid = document.querySelector('.test-grid');
-  if (!grid) return;
-  grid.innerHTML = data.testimonials.map(t => `
-    <div class="test-card">
-      <div class="test-comment">/* review */</div>
-      <p class="test-quote">${t.quote}</p>
-      <div class="test-name">${t.author}</div>
+  const placeholderHtml = `
+    <div class="freelancing-card freelancing-card-placeholder">
+      <div class="freelancing-placeholder-inner">
+        <div class="placeholder-icon"><i class="fa-solid fa-plus"></i></div>
+        <h3>Your Project Here</h3>
+        <p>Have a project in mind? Let's build something great together.</p>
+        <a href="#contact" class="btn btn-coral btn-sm">Discuss Your Project</a>
+      </div>
     </div>
-  `).join('');
+  `;
+
+  grid.innerHTML = cardsHtml + placeholderHtml;
 }
 
 function renderContact(data) {
   const d = data.contact;
-  const links = document.querySelector('.contact-links');
-  if (!links) return;
-  const h1 = links.querySelector('h1');
-  if (h1) h1.textContent = d.name;
-  const anchors = links.querySelectorAll('a');
-  if (anchors[0]) { anchors[0].href = `mailto:${d.email}`; anchors[0].innerHTML = `<span class="k">email</span>${d.email}`; }
-  if (anchors[1]) { anchors[1].href = `tel:${d.phone}`;    anchors[1].innerHTML = `<span class="k">phone</span>${d.phone}`; }
-  if (anchors[2]) { anchors[2].href = d.linkedin;           anchors[2].innerHTML = `<span class="k">linkedin</span>${d.linkedinLabel}`; }
-  if (anchors[3]) { anchors[3].href = d.github;             anchors[3].innerHTML = `<span class="k">github</span>${d.githubLabel}`; }
-  if (anchors[4]) { anchors[4].href = d.whatsapp;           anchors[4].innerHTML = `<span class="k">whatsapp</span>chat on WhatsApp`; }
+  if (!d) return;
+
+  const emailLink = document.getElementById('emailLink');
+  if (emailLink && d.email) {
+    emailLink.href = `mailto:${d.email}`;
+    const val = emailLink.querySelector('.contact-link-value');
+    if (val) val.textContent = d.email;
+  }
+
+  const phoneLink = document.getElementById('phoneLink');
+  if (phoneLink && d.phone) {
+    phoneLink.href = `tel:${d.phone}`;
+    const val = phoneLink.querySelector('.contact-link-value');
+    if (val) val.textContent = d.phone;
+  }
+
+  const linkedinLink = document.getElementById('linkedinLink');
+  if (linkedinLink && d.linkedin) {
+    linkedinLink.href = d.linkedin;
+    const val = linkedinLink.querySelector('.contact-link-value');
+    if (val) val.textContent = d.linkedinLabel || d.linkedin.replace(/^https?:\/\//, '');
+  }
+
+  const githubLink = document.getElementById('githubLink');
+  if (githubLink && d.github) {
+    githubLink.href = d.github;
+    const val = githubLink.querySelector('.contact-link-value');
+    if (val) val.textContent = d.githubLabel || d.github.replace(/^https?:\/\//, '');
+  }
+
+  const whatsappLink = document.getElementById('whatsappLink');
+  if (whatsappLink && d.whatsapp) {
+    whatsappLink.href = d.whatsapp;
+  }
 }
 
 function renderAll(data) {
-  if (!document.querySelector('.hero-name')) return; // Not on portfolio page
+  if (!document.querySelector('.hero-name')) return;
   renderHero(data);
   renderAbout(data);
-  renderSkills(data);
   renderProjects(data);
-  renderServices(data);
-  renderExperience(data);
-  renderTestimonials(data);
+  renderFreelancing(data);
   renderContact(data);
 }
 
@@ -286,7 +379,6 @@ function renderAll(data) {
 // BOOT — fetch from backend API, fall back to defaults
 // ============================================================
 document.addEventListener('DOMContentLoaded', async () => {
-  // Only render on the portfolio page
   if (!document.querySelector('.hero-name')) return;
 
   let data = DEFAULT_DATA;
@@ -294,12 +386,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     const res = await fetch('/api/portfolio');
     if (res.ok) {
       const json = await res.json();
-      if (json.success && json.data) data = json.data;
+      if (json.success && json.data) {
+        data = json.data;
+        if (!data.freelancingProjects || data.freelancingProjects.length === 0) {
+          data.freelancingProjects = DEFAULT_DATA.freelancingProjects || [];
+        }
+      }
     }
   } catch (err) {
-    console.warn('Could not reach backend — using default data:', err.message);
+    // Backend optional when loaded statically
   }
 
   renderAll(data);
-  window._portfolioRoles = data.hero.roles;
+  if (data.hero && data.hero.roles) {
+    window._portfolioRoles = data.hero.roles;
+  }
 });

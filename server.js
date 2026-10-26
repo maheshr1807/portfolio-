@@ -20,12 +20,19 @@ const PORT = process.env.PORT || 3001;
 // ---- Default data (used to seed DB on first run) ----
 const DEFAULT_DATA = {
   hero: {
-    name: 'Mahesh R',
-    roles: ['"Full Stack Web Developer"', '"MERN Stack Developer"', '"Freelance Web Developer"'],
-    description: 'I build fast, responsive, and scalable websites using React, Node.js, Express, and MongoDB — from e-commerce platforms to admin dashboards.',
-    ctaPrimary: { label: '$ view-projects', href: '#projects' },
-    ctaSecondary: { label: '$ hire-me', href: '#contact' },
-    ctaGhost: { label: '↓ download-resume', href: '#' },
+    greeting: "Hello, I'm",
+    name: 'Mahesh',
+    photo: 'public/images/profile/mahesh-1.jpeg',
+    slideshow: [
+      'public/images/profile/mahesh-1.jpeg',
+      'public/images/profile/mahesh-2.jpeg',
+      'public/images/profile/mahesh-3.jpeg',
+      'public/images/profile/mahesh-4.jpeg'
+    ],
+    roles: ['Full Stack Developer', 'MERN Stack Developer', 'Frontend & React Specialist', 'Freelance Web Developer'],
+    description: 'I build responsive web applications and practical digital solutions that help businesses grow online.',
+    ctaPrimary: { label: 'Hire Me', href: '#contact' },
+    ctaSecondary: { label: 'View Resume', href: './assets/Mahesh_R_Resume.pdf' },
     stackLayers: [
       { tech: 'React + Tailwind CSS', label: 'FRONTEND' },
       { tech: 'Node.js + Express', label: 'BACKEND' },
@@ -109,6 +116,58 @@ const DEFAULT_DATA = {
       sourceLink: '#'
     }
   ],
+  freelancingProjects: [
+    {
+      id: 'fp1',
+      title: 'Gym & Fitness Website',
+      client: 'Fitness Business',
+      category: 'Website Development',
+      description: 'Built a fully responsive gym website featuring membership plans, trainer profiles, class schedules, and a contact section with a clean, energetic design.',
+      image: 'img/gym-img.png',
+      techs: ['HTML', 'CSS', 'JavaScript'],
+      liveLink: 'https://maheshr1807.github.io/gym-site/'
+    },
+    {
+      id: 'fp2',
+      title: 'Karthika Catering Service',
+      client: 'Karthika Catering',
+      category: 'Business Website',
+      description: 'Developed a professional catering website showcasing menus, event catering services, and easy booking for weddings, parties, and corporate events.',
+      image: 'img/catering-img.png',
+      techs: ['HTML', 'CSS', 'JavaScript'],
+      liveLink: 'https://maheshr1807.github.io/Karthika-catering-service/'
+    },
+    {
+      id: 'fp3',
+      title: 'Hotel Booking Website',
+      client: 'Hospitality Business',
+      category: 'Website Development',
+      description: 'A premium hotel website showcasing luxury rooms, amenities, gallery, and online booking designed to attract and convert visitors into guests.',
+      image: 'img/hotel-img.png',
+      techs: ['HTML', 'CSS', 'JavaScript'],
+      liveLink: 'https://maheshr1807.github.io/hotel-booking/'
+    },
+    {
+      id: 'fp4',
+      title: 'Tuition Center Website',
+      client: 'Education Provider',
+      category: 'Education Website',
+      description: 'A clean website for a tutoring center displaying course offerings, batch schedules, teacher profiles, and enrollment information.',
+      image: 'img/tuition-img.png',
+      techs: ['HTML', 'CSS', 'JavaScript'],
+      liveLink: 'https://maheshr1807.github.io/tuition-website/'
+    },
+    {
+      id: 'fp5',
+      title: 'Travel & Tourism Website',
+      client: 'Travel Agency',
+      category: 'Travel & Tourism',
+      description: 'A vibrant travel website showcasing destinations, tour packages, and easy booking built to attract travelers and drive inquiries.',
+      image: 'img/travels img.png',
+      techs: ['HTML', 'CSS', 'JavaScript'],
+      liveLink: 'https://maheshr1807.github.io/travels/'
+    }
+  ],
   services: [
     { title: 'Business Website', desc: 'Fast, professional sites that represent your brand well.' },
     { title: 'E-commerce Website', desc: 'Full online stores with cart, checkout, and payments.' },
@@ -150,6 +209,53 @@ const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/portfolio'
 const DATA_FILE = path.join(__dirname, 'portfolio-data.json');
 let isDbConnected = false;
 
+function autoImportProfilePhotos() {
+  const targetDir = path.join(__dirname, 'public', 'images', 'profile');
+  if (!fs.existsSync(targetDir)) {
+    try { fs.mkdirSync(targetDir, { recursive: true }); } catch (e) {}
+  }
+
+  const userProfile = process.env.USERPROFILE || 'C:\\Users\\asus';
+  const searchDirs = [
+    path.join(__dirname, '..'), // C:\Users\asus\Downloads
+    __dirname,                   // workspace root
+    path.join(__dirname, 'img'),
+    path.join(userProfile, 'Downloads'),
+    path.join(userProfile, 'Desktop'),
+    path.join(userProfile, 'Pictures')
+  ];
+
+  const sequences = [
+    { target: 'mahesh-1.jpeg', patterns: [/mahesh\s*1\.(jpe?g|png|webp)/i, /^mahesh-1\.(jpe?g|png|webp)/i, /mahesh_1\.(jpe?g|png|webp)/i] },
+    { target: 'mahesh-2.jpeg', patterns: [/mahesh\s*2\.(jpe?g|png|webp)/i, /^mahesh-2\.(jpe?g|png|webp)/i, /mahesh_2\.(jpe?g|png|webp)/i] },
+    { target: 'mahesh-3.jpeg', patterns: [/mahesh\s*3\.(jpe?g|png|webp)/i, /^mahesh-3\.(jpe?g|png|webp)/i, /mahesh_3\.(jpe?g|png|webp)/i] },
+    { target: 'mahesh-4.jpeg', patterns: [/mahesh\s*4\.(jpe?g|png|webp)/i, /^mahesh-4\.(jpe?g|png|webp)/i, /mahesh_4\.(jpe?g|png|webp)/i] }
+  ];
+
+  for (const seq of sequences) {
+    const targetPath = path.join(targetDir, seq.target);
+    if (fs.existsSync(targetPath)) continue;
+
+    let found = false;
+    for (const dir of searchDirs) {
+      if (!fs.existsSync(dir)) continue;
+      try {
+        const files = fs.readdirSync(dir);
+        for (const file of files) {
+          if (seq.patterns.some(p => p.test(file))) {
+            const srcPath = path.join(dir, file);
+            fs.copyFileSync(srcPath, targetPath);
+            console.log(`  📸 Auto-imported: ${file} -> public/images/profile/${seq.target}`);
+            found = true;
+            break;
+          }
+        }
+      } catch (e) {}
+      if (found) break;
+    }
+  }
+}
+
 /** Read portfolio data (from MongoDB if connected, else from local JSON file) */
 async function readData() {
   if (isDbConnected) {
@@ -157,6 +263,10 @@ async function readData() {
       let doc = await Portfolio.findOne({ key: 'main' }).lean();
       if (doc) {
         const { _id, __v, key, createdAt, updatedAt, ...data } = doc;
+        if (!data.hero || !data.hero.slideshow || data.hero.ctaPrimary?.label === '$ view-projects') {
+          data.hero = { ...data.hero, ...DEFAULT_DATA.hero };
+          await Portfolio.updateOne({ key: 'main' }, { $set: { hero: data.hero } });
+        }
         return data;
       }
     } catch (err) {
@@ -205,6 +315,7 @@ async function writeData(data) {
 // GET /api/portfolio — return all data
 app.get('/api/portfolio', async (req, res) => {
   try {
+    autoImportProfilePhotos();
     const data = await readData();
     res.json({ success: true, data });
   } catch (err) {
@@ -253,6 +364,7 @@ app.get('*', (req, res) => {
 async function startServer() {
   console.log('');
   console.log('  🔄 Initializing Portfolio Server...');
+  autoImportProfilePhotos();
 
   if (MONGO_URI) {
     try {

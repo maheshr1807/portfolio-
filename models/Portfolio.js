@@ -13,7 +13,10 @@ const StackLayerSchema = new mongoose.Schema({
 }, { _id: false });
 
 const HeroSchema = new mongoose.Schema({
-  name:         { type: String, default: 'Mahesh R' },
+  greeting:     { type: String, default: "Hello, I'm" },
+  name:         { type: String, default: 'Mahesh' },
+  photo:        { type: String, default: 'public/images/profile/mahesh-1.jpeg' },
+  slideshow:    { type: [String], default: [] },
   roles:        { type: [String], default: [] },
   description:  { type: String, default: '' },
   ctaPrimary:   { label: String, href: String },
@@ -49,6 +52,17 @@ const ProjectSchema = new mongoose.Schema({
   sourceLink:  { type: String, default: '' }
 }, { _id: false });
 
+const FreelanceProjectSchema = new mongoose.Schema({
+  id:          { type: String, default: '' },
+  title:       { type: String, default: '' },
+  client:      { type: String, default: '' },
+  category:    { type: String, default: '' },
+  description: { type: String, default: '' },
+  image:       { type: String, default: '' },
+  techs:       { type: [String], default: [] },
+  liveLink:    { type: String, default: '' }
+}, { _id: false });
+
 const ServiceSchema = new mongoose.Schema({
   title: { type: String, default: '' },
   desc:  { type: String, default: '' }
@@ -77,17 +91,19 @@ const ContactSchema = new mongoose.Schema({
 
 // ---- Main Portfolio Schema ----
 const PortfolioSchema = new mongoose.Schema({
-  key:          { type: String, default: 'main', unique: true },
-  hero:         { type: HeroSchema,          default: () => ({}) },
-  about:        { type: AboutSchema,         default: () => ({}) },
-  skills:       { type: [SkillGroupSchema],  default: [] },
-  projects:     { type: [ProjectSchema],     default: [] },
-  services:     { type: [ServiceSchema],     default: [] },
-  experience:   { type: ExperienceSchema,    default: () => ({}) },
-  testimonials: { type: [TestimonialSchema], default: [] },
-  contact:      { type: ContactSchema,       default: () => ({}) }
+  key:                 { type: String, default: 'main', unique: true },
+  hero:                { type: HeroSchema,              default: () => ({}) },
+  about:               { type: AboutSchema,             default: () => ({}) },
+  skills:              { type: [SkillGroupSchema],      default: [] },
+  projects:            { type: [ProjectSchema],         default: [] },
+  freelancingProjects: { type: [FreelanceProjectSchema],default: [] },
+  services:            { type: [ServiceSchema],         default: [] },
+  experience:          { type: ExperienceSchema,        default: () => ({}) },
+  testimonials:        { type: [TestimonialSchema],     default: [] },
+  contact:             { type: ContactSchema,           default: () => ({}) }
 }, {
-  timestamps: true
+  timestamps: true,
+  strict: false
 });
 
 module.exports = mongoose.model('Portfolio', PortfolioSchema);
